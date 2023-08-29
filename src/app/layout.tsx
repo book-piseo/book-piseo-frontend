@@ -19,7 +19,11 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css"
           // @ts-ignore
           precedence="default"/>
-      <body >{children}</body>
+      <body>   
+        {/* 임시 - header  */}
+            <div className={`w-full h-[104px] bg-primary-sub`}/>
+            {children}
+            </body>
     </html>
   )
 }
