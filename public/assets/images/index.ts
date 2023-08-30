@@ -1,0 +1,1 @@
+export { default as ImgHomeMain } from './img_home_main.png'; 
