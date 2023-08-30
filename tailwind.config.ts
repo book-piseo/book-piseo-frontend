@@ -22,6 +22,6 @@ const config: Config = {
     extend: {
     },
   },
-  plugins: [], 
+  plugins: [require('tailwindcss-convert-px-to-rem')], 
 }
 export default config
