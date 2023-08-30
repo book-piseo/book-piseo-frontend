@@ -1,10 +1,10 @@
 'use client'
 import React from 'react'
-import { PostedBookInfo } from '@/components/PostedBookInfo'
+import { PostedBookInfo } from '@/components/content/PostedBookInfo'
 
 const Page = () => {
 	return (
-		<div className="pt-[120px] pb-[170px] px-[200px] h-full">
+		<div className="pt-[120px] mb-[170px] px-[350px] h-full">
 			{/* path */}
 			<div className="flex gap-[6px] mb-[32px] ">
 				<div className="text-[20px] text-secondary">책을 피서 운영팀</div>
