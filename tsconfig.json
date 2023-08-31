@@ -20,13 +20,7 @@
       }
     ],
     "paths": {
-      "@assets/*": ["./public/assets/*"],
-      "@components/*": ["./src/components/*"],
-      "@constants/*": ["./src/constants/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@models/*": ["./src/models/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@/*": ["./src/*"],
+      "@/*": ["./src/*"]
     }
   },
   "include": ["custom.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

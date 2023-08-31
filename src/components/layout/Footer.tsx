@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { LogoFooter } from '@assets/icons';
+import { LogoFooter } from '../../../public/assets/icons';
 
 
 const Footer = () => {

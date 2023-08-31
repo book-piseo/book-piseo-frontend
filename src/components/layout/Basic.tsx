@@ -1,7 +1,7 @@
 
 import React from 'react';
+import Header from './Header';
 import Footer from './Footer';
-import Navbar from './Navbar';
 
 type Props = {
     children: React.ReactNode
@@ -10,8 +10,8 @@ type Props = {
 const Basic = ({children}: Props) => {
     return (
         <div className='relative w-full h-screen'>
-            <Navbar />
-            <main>{children}</main>
+            <Header />
+            {children}
             <Footer />
         </div>
     );
