@@ -1,6 +1,6 @@
 import BookCoverWithNaverLink from "./BookCoverWithNaverLink"
 
-export const PostedBookInfo = () => {
+export const ContentBookInfo = () => {
     return(
         <div className='flex gap-[40px] w-[full]'>
         {/* 책 표지 */}
