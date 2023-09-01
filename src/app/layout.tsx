@@ -1,6 +1,5 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import Navbar from '@components/layout/Navbar'
 import RootPage from './page'
 
 export const metadata: Metadata = {

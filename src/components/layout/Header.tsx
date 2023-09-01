@@ -20,7 +20,7 @@ const Navbar = () => {
       <div className="">
         <Image src={LogoGnb} alt="logo" width={144} height={30} />
       </div>
-      <nav className="flex items-center gap-[40px]">
+      <div className="flex items-center gap-[40px]">
         {!store.isLogin ? (
           <Link href="/signin">
             <RoundButton label="로그인" />
@@ -63,7 +63,7 @@ const Navbar = () => {
             </div>
           </>
         )}
-      </nav>
+      </div>
     </header>
   )
 }

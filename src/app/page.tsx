@@ -1,6 +1,6 @@
 'use client'
 import { useAuthStore } from '@/stores/useAuthStore'
-import Navbar from '@components/layout/Navbar'
+import Header from '@components/layout/Header'
 import useStore from '@hooks/useStore'
 
 export default function RootPage({ children }: { children: React.ReactNode }) {
@@ -10,7 +10,7 @@ export default function RootPage({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="w-screen h-full">
-      {store?.isLogin && <Navbar />}
+      {store?.isLogin && <Header />}
       <main>{children}</main>
     </div>
   )
