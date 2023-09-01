@@ -4,49 +4,58 @@ import Image from 'next/image'
 import { IcAvatarLarge, IcWrite, LogoGnb } from '@assets/icons'
 import Link from 'next/link'
 import { useAuthStore } from '@/stores/useAuthStore'
+import useStore from '@hooks/useStore'
+import { IconButton } from '@components/elements/buttons/IconButton'
+import RoundButton from '@components/elements/buttons/RoundButton'
 
 const Navbar = () => {
-  const { isLogin, setIsLogin } = useAuthStore()
+  const store = useStore(useAuthStore, (state) => state)
+
+  if (!store) return <></>
 
   return (
-    <div className="flex h-[104px] items-center justify-between px-72 bg-white border border-b-1 border-light-grey-2">
+    <header className="flex h-[80px] items-center justify-between px-[120px] bg-white">
       <div className="">
-        <Image src={LogoGnb} alt="logo" width={192} height={40} />
+        <Image src={LogoGnb} alt="logo" width={144} height={30} />
       </div>
-      {!isLogin ? (
-        <Link
-          href="/"
-          className="piseo-login-button flex w-fit h-[56px] items-center justify-center px-[40px] border rounded-[30px] border-primary border-solid"
-        >
-          <span className="text-primary text-xl font-semibold">로그인</span>
-        </Link>
-      ) : (
-        <>
-          {/* MARK :: SAVE BUTTON */}
-          <button className="piseo-save-button flex w-fit h-[56px] items-center justify-center px-[40px] rounded-[30px] bg-primary">
-            <span className="text-white text-xl font-semibold">저장</span>
-          </button>
-
-          {/* MARK :: SAVE BUTTON(DISBLAED) */}
-          <button className="piseo-save-button disabled flex w-fit h-[56px] items-center justify-center px-[40px] rounded-[30px] bg-light-grey-2 cursor-not-allowed">
-            <span className="text-white text-xl font-semibold">저장</span>
-          </button>
-
-          {/* MARK :: WRITING BUTTON */}
-          <Link href="/post" className="piseo-write-button flex gap-1.5 items-center">
-            <div className="flex w-[48px] h-[48px] items-center justify-center">
-              <Image src={IcWrite} alt="writing" />
-            </div>
-            <span className="text-primary text-2xl font-semibold">글쓰기</span>
+      <nav className="flex items-center gap-[40px]">
+        {!store.isLogin ? (
+          <Link href="/signin">
+            <RoundButton label="로그인" />
           </Link>
+        ) : (
+          <>
+            {/* MARK :: SAVE BUTTON */}
+            <RoundButton
+              label="저장"
+              disabled={false}
+              onClick={() => {
+                alert('확인')
+              }}
+            />
 
-          {/* MARK :: AVATAR  */}
-          <div className="cursor-pointer" onClick={() => setIsLogin(false)} title="로그아웃">
-            <Image src={IcAvatarLarge} alt="empty profile image" />
-          </div>
-        </>
-      )}
-    </div>
+            {/* MARK :: SAVE BUTTON(DISBLAED) */}
+            <RoundButton
+              label="저장"
+              disabled={true}
+              onClick={() => {
+                alert('확인')
+              }}
+            />
+
+            {/* MARK :: WRITING BUTTON */}
+            <Link href="/post">
+              <IconButton icon={IcWrite} label="글쓰기" />
+            </Link>
+
+            {/* MARK :: AVATAR  */}
+            <div className="cursor-pointer" onClick={() => store && store.setIsLogin(false)} title="로그아웃">
+              <Image src={IcAvatarLarge} alt="empty profile image" width={42} height={42} />
+            </div>
+          </>
+        )}
+      </nav>
+    </header>
   )
 }
 

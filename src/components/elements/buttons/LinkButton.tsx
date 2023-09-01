@@ -6,12 +6,10 @@ type LinkButtonProps = {
   pathUrl: string
 }
 
-const LinkButton = ({ children, pathUrl }: LinkButtonProps) => {
+export const LinkButton = ({ children, pathUrl }: LinkButtonProps) => {
   return (
     <Link href={pathUrl} className="text-dark-grey-2 text-[0.875rem] font-medium">
       {children}
     </Link>
   )
 }
-
-export default LinkButton

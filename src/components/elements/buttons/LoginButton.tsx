@@ -13,16 +13,14 @@ const LoginButtonConfig = {
   active: 'bg-primary cursor-pointer',
 }
 
-const LoginButton = ({ label = '로그인', width, height, disabled, onClick }: ButtonProps) => {
+export const LoginButton = ({ label = '로그인', width, height, disabled, onClick }: ButtonProps) => {
   const config = disabled ? 'disabled' : 'active'
   return (
     <div
-      className={`flex items-center justify-center w-full h-[3.875rem] py-[0.625rem] px-[1.25rem] rounded-[0.625rem] ${LoginButtonConfig[config]}`}
+      className={`flex items-center justify-center w-full h-[62px] py-[10px] px-[20px] rounded-[10px] ${LoginButtonConfig[config]}`}
       onClick={onClick}
     >
       <span className="text-white text-[1rem] font-semibold">{label}</span>
     </div>
   )
 }
-
-export default LoginButton
