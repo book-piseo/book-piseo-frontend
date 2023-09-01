@@ -7,9 +7,11 @@ import { useAuthStore } from '@/stores/useAuthStore'
 import useStore from '@hooks/useStore'
 import { IconButton } from '@components/elements/buttons/IconButton'
 import RoundButton from '@components/elements/buttons/RoundButton'
+import { useRouter } from 'next/navigation'
 
 const Navbar = () => {
   const store = useStore(useAuthStore, (state) => state)
+  const router = useRouter()
 
   if (!store) return <></>
 
@@ -49,7 +51,14 @@ const Navbar = () => {
             </Link>
 
             {/* MARK :: AVATAR  */}
-            <div className="cursor-pointer" onClick={() => store && store.setIsLogin(false)} title="로그아웃">
+            <div
+              className="cursor-pointer"
+              onClick={() => {
+                store.setIsLogin(false)
+                router.push('/signin')
+              }}
+              title="로그아웃"
+            >
               <Image src={IcAvatarLarge} alt="empty profile image" width={42} height={42} />
             </div>
           </>
