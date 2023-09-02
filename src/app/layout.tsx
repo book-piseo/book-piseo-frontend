@@ -1,18 +1,14 @@
-'use client'
-import Basic from '@components/layout/Basic'
 import './globals.css'
 import type { Metadata } from 'next'
-import Login from '@components/layout/Login'
-import { useAuthStore } from '@/stores/useAuthStore'
+import RootPage from './page'
 
 export const metadata: Metadata = {
   title: 'book-piseo',
   description: '',
 }
 
+// MARK :: RootLayout은 서버 -> 클라이언트 컴포넌트가 될 수 없음
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const { isLogin } = useAuthStore()
-
   return (
     <html lang="en">
       <link
@@ -23,7 +19,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         // @ts-ignore
         precedence="default"
       />
-      <body className="">{!isLogin ? <Login /> : <Basic>{children}</Basic>}</body>
+      <body className="">
+        <RootPage>{children}</RootPage>
+      </body>
     </html>
   )
 }
