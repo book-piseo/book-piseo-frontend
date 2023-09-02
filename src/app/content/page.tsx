@@ -6,7 +6,7 @@ import { Content } from '@/components/content/Content'
 
 const Page = () => {
 	return (
-		<div className="pt-[120px] mb-[170px] px-[350px] h-full">
+		<div className="rem:pt-[100px] rem:mb-[132px] rem:px-[350px] h-full">
 			{/* 경로 */}
 			<ContentPath/>
 			{/* 책 정보 */}
@@ -16,4 +16,4 @@ const Page = () => {
 		</div>
 	)
 }
-export default Page
+export default Page;

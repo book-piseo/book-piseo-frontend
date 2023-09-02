@@ -1,5 +1,5 @@
 export const Content = () => (
-    <div className='mt-[100px] text-[24px] text-dark-grey-1 font-normal'>
+    <div className='rem:mt-[72px] text-s3_regular text-dark-grey-1'>
     조지 오웰은 천재인듯하다. 조지 오웰은 천재인듯하다.조지 오웰은
     천재인듯하다.조지 오웰은 천재인듯하다. 조지 오웰은 천재인듯하다.조지
     오웰은 천재인듯하다.조지 오웰은 천재인듯하다.조지 오웰은 천재인듯하다.

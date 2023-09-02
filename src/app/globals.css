@@ -18,3 +18,18 @@ body {
   font-family: "Pretendard Variable", serif;
   background: white;
 }
+
+  html {
+   font-size:12px;
+
+   @media screen and (min-width:1600px) {
+    font-size:13px;
+   };
+
+   @media screen and (min-width: 1920px) {
+    font-size:14px;
+   };
+  }
+
+
+

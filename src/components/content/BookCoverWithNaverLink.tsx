@@ -7,10 +7,10 @@ import { IcRightArrow } from '../../../public/assets/icons';
 
 const BookCoverWithNaverLink = ({src, onClickLink}: {src: string, onClickLink: ()=> void}) => {
     return (
-        <div className='min-w-[275px]'>
-            <Image className='w-full h-[430px]' src={src} alt='bookCover'/>
-            <div className='w-full py-[14px] pl-[20px] pr-[10px] flex justify-between items-center bg-light-grey-1'>
-            <div onClick={onClickLink} className='text-dark-grey-2 text-[16px] font-bold' >
+        <div className='rem:min-w-[275px]'>
+            <Image className='w-full rem:h-[430px]' src={src} alt='bookCover'/>
+            <div className='w-full rem:py-[14px] rem:pl-[20px] rem:pr-[10px] flex justify-between items-center bg-light-grey-1'>
+            <div onClick={onClickLink} className='text-dark-grey-2 text-p1_medium' >
                도서 구매
             </div>
             <div className='flex gap-0 items-center'>
