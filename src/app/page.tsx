@@ -1,17 +1,14 @@
-'use client'
-import { useAuthStore } from '@/stores/useAuthStore'
-import Header from '@components/layout/Header'
-import useStore from '@hooks/useStore'
+import { LogoGnb } from '@assets/icons';
+import Navbar from '@components/layout/Header';
+import Image from 'next/image';
 
-export default function RootPage({ children }: { children: React.ReactNode }) {
-  // MARK :: zustand persist 적용 시, Error 발생
-  const store = useStore(useAuthStore, (state) => state)
-  console.log({ store })
-
-  return (
-    <div className="w-screen h-full">
-      {store?.isLogin && <Header />}
-      <main>{children}</main>
-    </div>
-  )
+export default function HeaderPage() {
+	return (
+		<header className="page-header fixed top-0 flex w-screen rem:h-[80px] items-center justify-between rem:px-[120px] bg-white">
+			<div className="">
+				<Image src={LogoGnb} alt="logo" className="rem:w-[144px] rem:h-[30px]" />
+			</div>
+			<Navbar />
+		</header>
+	);
 }
