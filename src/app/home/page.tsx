@@ -1,87 +1,152 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import { IcArrowUpLight, IcBook, IcOtherReadBook, IcRightArrow, IcTeamHistoryCheck } from '@assets/icons';
+import { IcOtherReadBook } from '@assets/icons';
 import BookReview from '@components/home/BookReview';
-import { ImgBookCoverExample } from '@assets/images';
-import { LinkButton } from '@components/elements/buttons/LinkButton';
-import AvatarProfile from '@components/common/AvatarProfile';
+import LatestTeamBookReview from '@components/home/LatestTeamBookReview';
+import CarouselArrowButton from '@components/elements/buttons/CarouselArrowButton';
+import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@stores/useAuthStore';
+import useStore from '@hooks/useStore';
+
+export type ContentList = {
+	contentId: string;
+	title: string;
+	content: string;
+	userInfo: {
+		userId: string;
+		userName: string;
+		userImgUrl?: string;
+		teamInfo: {
+			teamId: string;
+			teamName: string;
+		};
+	};
+	bookInfo: {
+		title: string;
+		imgUrl?: string;
+	};
+};
+
+const InitContentList = [
+	{
+		contentId: '1',
+		title: '작가의 경험에 빗대어 나의 여행의 이유를 생각하게 하는 책',
+		content: '',
+		userInfo: {
+			userId: '12332312',
+			userName: '웬디',
+			userImgUrl: '',
+			teamInfo: {
+				teamId: '2',
+				teamName: '독서클럽: 책을 피서',
+			},
+		},
+		bookInfo: {
+			title: '1984',
+			imgUrl: '',
+		},
+	},
+	{
+		contentId: '2',
+		title: '책 이름처럼 멋진 신세계! 제목은 두줄까지만 노출하고 오버되면 말줄임입니다.',
+		content: `What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
+		userInfo: {
+			userId: '12332312',
+			userName: '데이지',
+			userImgUrl: '',
+			teamInfo: {
+				teamId: '1',
+				teamName: '클라이밍 하다',
+			},
+		},
+		bookInfo: {
+			title: '여행의 이유',
+			imgUrl: '',
+		},
+	},
+	{
+		contentId: '3',
+		title: '풋살은 즐거워',
+		content: '',
+		userInfo: {
+			userId: '12332312',
+			userName: '작성자 이름',
+			userImgUrl: '',
+			teamInfo: {
+				teamId: '1',
+				teamName: '샤커즈',
+			},
+		},
+		bookInfo: {
+			title: '풋살은 즐거워',
+			imgUrl: '',
+		},
+	},
+	{
+		contentId: '3',
+		title: '(쏙쏙 들어오는) 함수형 코딩 심플한 코드로 복잡한 소프트웨어 길들이기 - 에릭노먼드 지음, 김은민 옮김',
+		content: '',
+		userInfo: {
+			userId: '12332312',
+			userName: '작성자 이름',
+			userImgUrl: '',
+			teamInfo: {
+				teamId: '1',
+				teamName: '에릭노먼드 지음, 김은민 옮김',
+			},
+		},
+		bookInfo: {
+			title: '(쏙쏙 들어오는) 함수형 코딩 심플한 코드로 복잡한 소프트웨어 길들이기 - 에릭노먼드 지음, 김은민 옮김',
+			imgUrl: '',
+		},
+	},
+	{
+		contentId: '3',
+		title: '프론트엔트: 타입스크립트 스터디',
+		content: '',
+		userInfo: {
+			userId: '12332312',
+			userName: '웬디',
+			userImgUrl: '',
+			teamInfo: {
+				teamId: '1',
+				teamName: '프론트엔트: 타입스크립트 스터디',
+			},
+		},
+		bookInfo: {
+			title: '이펙티브 타입스크립트',
+			imgUrl: '',
+		},
+	},
+];
 
 function HomePage() {
+	const router = useRouter();
+	const store = useStore(useAuthStore, (state) => state);
+	const [contentList, setContentList] = useState<ContentList[]>(InitContentList);
+
+	const handleBookReview = (contentId: string) => {
+		router.push('/content');
+	};
+
 	return (
 		<>
-			<div className="grid grid-cols-[18.13rem_1fr_18.13rem] items-center justify-center rem:pt-[50px] rem:pb-[20px]">
-				<div className="flex rem:w-[290px] justify-center">
-					<div className="flex items-center justify-center rem:w-[100px] rem:h-[100px] m-[5px] border rounded-full border-dark-grey-2 cursor-pointer">
-						<Image src={IcRightArrow} alt="왼쪽으로" className="rem:w-[48px] rem:h-[48px] rotate-180" />
+			{/* NOTE :: 로그인 시에 노출 */}
+			{store && store.isLogin && (
+				<div className="grid grid-cols-[18.13rem_1fr_18.13rem] items-center justify-center rem:pt-[50px] rem:pb-[20px]">
+					<div className="flex rem:w-[290px] justify-center invisible">
+						<CarouselArrowButton direction="left" disabled />
 					</div>
-				</div>
-				<div className="flex flex-col w-[calc(100vw-(18.13rem*2))] h-fit rem:pt-[30px] rem:px-[75px] rem:gap-[16px] bg-primary-sub rounded-[30px]">
-					<div className="flex items-center justify-between">
-						<div className="flex items-center rem:gap-[8px]">
-							<Image
-								src={IcTeamHistoryCheck}
-								alt="팀원이 남긴 독서 기록을 지금 확인해보세요"
-								className="rem:w-[48px] rem:h-[48px]"
-							/>
-							<span className="text-s3_medium text-dark-grey-1">팀원이 남긴 독서 기록을 지금 확인해보세요!</span>
-						</div>
-						<div className="flex rem:min-h-[35px] items-center justify-center rem:py-[8px] rem:px-[24px] border bg-white rounded-[30px] border-secondary leading-[normal]">
-							<span className="text-p1_semibold text-primary">1/5</span>
-						</div>
-					</div>
-					<div className="grid grid-cols-[30%_70%]">
-						<Image
-							src={ImgBookCoverExample}
-							alt="예시 책 이미지"
-							className="rem:w-[305px] rem:h-[270px] rounded-[30px_30px_0_0] object-cover object-top "
-						/>
 
-						<div className="flex flex-col rem:h-[230px] justify-between rem:pl-[80px]">
-							<div className="flex flex-col rem:gap-[30px]">
-								<div className="flex items-center justify-between">
-									<div className="rem:px-[12px] border-l-[4px] border-dark-grey-1 text-dark-grey-1 text-s3_medium rem:leading-[22px]">
-										책을 피서 운영팀
-									</div>
-									<LinkButton pathUrl="/team" className="flex items-center rem:gap-[6rem]">
-										<span>전체 보기</span>
-										<Image src={IcArrowUpLight} alt="전체 보기" className="rem:w-[22px] rem:h-[22px]" />
-									</LinkButton>
-								</div>
-								<div className="flex flex-col rem:gap-[14px]">
-									<div className="text-dark-grey-1 text-s1_semibold text-ellipsis-line-2 rem:leading-[28px]">
-										마지막 문장이 제일 압권! 먼 미래를 내다본 천재 조지 오웰 어쩌구 저쩌구 게시물 제목은 두 줄까지만
-										표기합니다먼 미래를 내다본 천재 조지 오웰 어쩌구 저쩌구 게시물 제목은 두 줄까지만 표기합니다먼
-										미래를 내다본 천재 조지 오웰 어쩌구 저쩌구 게시물 제목은 두 줄까지만 표기합니다먼 미래를 내다본 천재
-										조지 오웰 어쩌구 저쩌구 게시물 제목은 두 줄까지만 표기합니다
-									</div>
+					{/* 최신 팀 리뷰 캐러셀 */}
+					<LatestTeamBookReview />
 
-									<div className="flex items-center rem:gap-[10px] text-dark-grey-2 text-p1_regular">
-										<AvatarProfile
-											avatarSize="medium"
-											userInfo={{ userId: '1231231', userName: '작성자 이름', userImgUrl: '' }}
-											labelStyle="text-dark-grey-2 text-p1_regular"
-										/>
-										<span>|</span>
-										<span>YYYY.MM.DD</span>
-									</div>
-								</div>
-							</div>
-							<div className="flex w-[80%] items-center rem:p-[10px] rem:gap-[8px] bg-white rounded-[4px]">
-								<Image src={IcBook} alt="책제목" className="rem:w-[24px] rem:h-[24px]" />
-								<p className="text-ellipsis text-dark-grey-1 text-p1_semibold">
-									책 이름은 한 줄까지만책 책 이름은 한 줄까지만책 책 이름은 한 줄까지만책 이름은 한 줄까지만책 이름은 한
-									줄까지만책 이름은 한 줄까지만 한줄까지
-								</p>
-							</div>
-						</div>
+					<div className="flex rem:w-[290px] justify-center invisible">
+						<CarouselArrowButton direction="right" />
 					</div>
 				</div>
-				<div className="flex rem:w-[290px] justify-center">
-					<div className="flex items-center justify-center rem:w-[100px] rem:h-[100px] m-[5px] border rounded-full border-dark-grey-2 cursor-pointer">
-						<Image src={IcRightArrow} alt="오른쪽으로" className="rem:w-[48px] rem:h-[48px]" />
-					</div>
-				</div>
-			</div>
+			)}
 
 			<div className="grid rem:gap-y-[34px] rem:mx-[290px] rem:pt-[70px]">
 				<div className="flex items-center rem:gap-[8px]">
@@ -89,7 +154,15 @@ function HomePage() {
 					<p className="text-s2_medium">다른 피서인은 이런 책을 읽었어요!</p>
 				</div>
 				{/* 리뷰 리스트 */}
-				<BookReview />
+				<div className="grid w-full h-fit grid-cols-4 rem:gap-x-[40px] rem:gap-y-[80px]">
+					{contentList.map((content, index) => (
+						<BookReview
+							key={`book-review-item__${index}`}
+							content={content}
+							onClick={() => handleBookReview(content.contentId)}
+						/>
+					))}
+				</div>
 			</div>
 		</>
 	);

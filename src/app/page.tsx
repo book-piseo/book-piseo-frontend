@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React from 'react';
 import { IcWrite } from '@assets/icons';
 import Link from 'next/link';
-import { useAuthStore } from '@/stores/useAuthStore';
+import { useAuthStore } from '@stores/useAuthStore';
 import useStore from '@hooks/useStore';
 import { IconButton } from '@components/elements/buttons/IconButton';
 import RoundButton from '@components/elements/buttons/RoundButton';
@@ -29,9 +29,9 @@ export default function HeaderPage() {
 
 	return (
 		<header className="page-header fixed top-0 flex w-screen rem:h-[80px] items-center justify-between rem:px-[120px] bg-white z-50">
-			<div className="">
+			<Link href="/home">
 				<Image src={LogoGnb} alt="logo" className="rem:w-[144px] rem:h-[30px]" />
-			</div>
+			</Link>
 			<div className="flex items-center rem:gap-[40px]">
 				{store && !store.isLogin ? (
 					<Link href="/signin">
