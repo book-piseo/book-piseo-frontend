@@ -5,6 +5,7 @@ import { IcBook } from '@assets/icons';
 import EmptyBookCoverImage from '@components/common/EmptyBookCoverImage';
 import React, { useState } from 'react';
 import Image from 'next/image';
+import AvatarProfile from '@components/common/AvatarProfile';
 
 type BookReviewItemProps = {
 	content: ContentList;
@@ -46,10 +47,7 @@ const BookReviewItem = ({ content, onClick }: BookReviewItemProps) => {
 				<div className="rem:w-max[305px] text-s3_semibold text-dark-grey-1 text-ellipsis-line-2">{content.title}</div>
 
 				{/* 리뷰 정보 */}
-				<div className="flex items-center rem:gap-[8px]">
-					<Avatar size="small" path="" />
-					<span className="text-p2_medium text-dark-grey-1">{content.userInfo.userName}</span>
-				</div>
+				<AvatarProfile userInfo={content.userInfo} />
 
 				{/* 팀 정보 */}
 				<div className="rem:w-max[305px] text-p2_medium text-light-grey-2 text-ellipsis">
