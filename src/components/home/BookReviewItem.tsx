@@ -8,9 +8,10 @@ import Image from 'next/image';
 
 type BookReviewItemProps = {
 	content: ContentList;
+	onClick: () => void;
 };
 
-const BookReviewItem = ({ content }: BookReviewItemProps) => {
+const BookReviewItem = ({ content, onClick }: BookReviewItemProps) => {
 	const [isHovering, setIsHovering] = useState(false);
 
 	const handleMouseOver = () => {
@@ -22,7 +23,7 @@ const BookReviewItem = ({ content }: BookReviewItemProps) => {
 	};
 
 	return (
-		<div className="flex flex-col w-full rem:gap-[20px]">
+		<div className="flex flex-col w-full rem:gap-[20px]" onClick={onClick}>
 			{/* 책 커버 이미지 */}
 			<div className="relative cursor-pointer" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
 				<div className={`absolute w-full rem:h-[470px] ${isHovering ? 'visible' : 'invisible'}`}>

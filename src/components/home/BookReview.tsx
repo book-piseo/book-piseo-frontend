@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import BookReviewItem from './BookReviewItem';
+import { useRouter } from 'next/navigation';
 
 export type ContentList = {
 	contentId: string;
@@ -115,12 +116,21 @@ const InitContentList = [
 ];
 
 const BookReview = () => {
+	const router = useRouter();
 	const [contentList, setContentList] = useState<ContentList[]>(InitContentList);
+
+	const handleBookReview = (contentId: string) => {
+		router.push('/content');
+	};
 
 	return (
 		<div className="grid w-full h-fit grid-cols-4 rem:gap-x-[40px] rem:gap-y-[80px]">
 			{contentList.map((content, index) => (
-				<BookReviewItem key={`book-review-item__${index}`} content={content} />
+				<BookReviewItem
+					key={`book-review-item__${index}`}
+					content={content}
+					onClick={() => handleBookReview(content.contentId)}
+				/>
 			))}
 		</div>
 	);

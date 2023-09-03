@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<body className="overflow-hidden">
 				<div className="w-screen h-full relative">
 					<HeaderPage />
-					<main className={`w-screen h-screen overflow-x-hidden overflow-y-auto rem:pt-[80px]`}>{children}</main>
+					<main className={`w-screen h-screen overflow-x-hidden overflow-y-auto`}>{children}</main>
 				</div>
 			</body>
 		</html>
