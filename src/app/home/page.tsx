@@ -10,13 +10,13 @@ function HomePage() {
 	return (
 		<>
 			<div className="grid grid-cols-[18.13rem_1fr_18.13rem] items-center justify-center rem:pt-[50px] rem:pb-[20px]">
-				<div className="flex justify-center">
+				<div className="flex rem:w-[290px] justify-center">
 					<div className="flex items-center justify-center rem:w-[100px] rem:h-[100px] m-[5px] border rounded-full border-dark-grey-2 cursor-pointer">
 						<Image src={IcRightArrow} alt="왼쪽으로" className="rem:w-[48px] rem:h-[48px] rotate-180" />
 					</div>
 				</div>
-				<div className="flex flex-col h-fit rem:pt-[30px] rem:px-[75px] rem:gap-[16px] bg-primary-sub rounded-[30px]">
-					<div className="flex justify-between">
+				<div className="flex flex-col w-[calc(100vw-(18.13rem*2))] h-fit rem:pt-[30px] rem:px-[75px] rem:gap-[16px] bg-primary-sub rounded-[30px]">
+					<div className="flex items-center justify-between">
 						<div className="flex items-center rem:gap-[8px]">
 							<Image
 								src={IcTeamHistoryCheck}
@@ -25,18 +25,18 @@ function HomePage() {
 							/>
 							<span className="text-s3_medium text-dark-grey-1">팀원이 남긴 독서 기록을 지금 확인해보세요!</span>
 						</div>
-						<div className="flex items-center justify-center rem:py-[8px] rem:px-[24px] border bg-white rounded-[30px] border-secondary">
+						<div className="flex rem:min-h-[35px] items-center justify-center rem:py-[8px] rem:px-[24px] border bg-white rounded-[30px] border-secondary leading-[normal]">
 							<span className="text-p1_semibold text-primary">1/5</span>
 						</div>
 					</div>
-					<div className="grid grid-cols-[19.0625rem_1fr] rem:gap-[80px]">
+					<div className="grid grid-cols-[30%_70%]">
 						<Image
 							src={ImgBookCoverExample}
 							alt="예시 책 이미지"
 							className="rem:w-[305px] rem:h-[270px] rounded-[30px_30px_0_0] object-cover object-top "
 						/>
 
-						<div className="flex flex-col rem:h-[230px] justify-between">
+						<div className="flex flex-col rem:h-[230px] justify-between rem:pl-[80px]">
 							<div className="flex flex-col rem:gap-[30px]">
 								<div className="flex items-center justify-between">
 									<div className="rem:px-[12px] border-l-[4px] border-dark-grey-1 text-dark-grey-1 text-s3_medium rem:leading-[22px]">
@@ -76,7 +76,7 @@ function HomePage() {
 						</div>
 					</div>
 				</div>
-				<div className="flex justify-center">
+				<div className="flex rem:w-[290px] justify-center">
 					<div className="flex items-center justify-center rem:w-[100px] rem:h-[100px] m-[5px] border rounded-full border-dark-grey-2 cursor-pointer">
 						<Image src={IcRightArrow} alt="오른쪽으로" className="rem:w-[48px] rem:h-[48px]" />
 					</div>
