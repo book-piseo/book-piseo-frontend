@@ -1,9 +1,9 @@
-import BookCoverWithNaverLink from './BookCoverWithNaverLink'
-import DummyBookCoverImage from '../../../public/assets/images/img_book-cover-example.png'
+import BookCoverWithNaverLink from './BookCoverWithNaverLink';
+import DummyBookCoverImage from '../../../public/assets/images/img_book-cover-example.png';
 
 export const ContentBookInfo = () => {
 	return (
-		<div className="flex rem:gap-[40px] w-[full]">
+		<div className="flex rem:gap-[40px] w-full">
 			{/* 책 표지 */}
 			<BookCoverWithNaverLink src={DummyBookCoverImage} onClickLink={() => {}} />
 			{/* 책 설명  */}
@@ -15,7 +15,7 @@ export const ContentBookInfo = () => {
 					<div className="text-p1_regular text-dark-grey-2">책을 피서 운영자 | YYYY.MM.DD</div>
 				</div>
 
-				<div className="bg-primary-sub w-[full] rem:py-[24px] rem:pr-[40px] rem:pl-[30px] rounded-[10px]">
+				<div className="bg-primary-sub w-full rem:py-[24px] rem:pr-[40px] rem:pl-[30px] rounded-[10px]">
 					<div className="text-s1_semibold">1984</div>
 					<div className="flex rem:gap-[10px] text-s3_medium text-dark-grey-1">
 						<span>저자</span>
@@ -28,5 +28,5 @@ export const ContentBookInfo = () => {
 				</div>
 			</div>
 		</div>
-	)
-}
+	);
+};
