@@ -13,3 +13,7 @@ export { default as IcCheckbox } from './icon-checkbox-default.svg';
 export { default as IcCheckboxActive } from './icon-checkbox-active.svg';
 export { default as IcAvatarLarge } from './icon-avatar-lg.svg';
 export { default as IcTeamInfo } from './icon-team-info.svg';
+export { default as IcArrowDown } from './icon-arrow-down.svg';
+export { default as IcClose } from './icon-close.svg';
+export { default as IcSearch } from './icon-search.svg';
+export { default as IcCancel } from './icon-cancel.svg';

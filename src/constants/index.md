@@ -1,1 +1,0 @@
-constants directory temp file
