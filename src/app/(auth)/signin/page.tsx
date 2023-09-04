@@ -7,15 +7,16 @@ import Input from '@components/forms/inputGroups/Input';
 import { LoginButton } from '@components/elements/buttons/LoginButton';
 import useStore from '@hooks/useStore';
 import { useRouter } from 'next/navigation';
+import { login } from '@apis/loginApi';
 
 function Login() {
-	// MARK :: zustand persist 적용 시, Error 발생
 	const router = useRouter();
 	const store = useStore(useAuthStore, (state) => state);
 
 	if (!store) return <></>;
 
-	const handleLogin = () => {
+	const handleLogin = async () => {
+		// const result = await login({ email: store.email, password: store.password });
 		store.setIsLogin(true);
 		router.push('/home');
 	};
@@ -28,16 +29,21 @@ function Login() {
 				</div>
 
 				<div className="grid rem:gap-[20px] rem:pb-[30px]">
-					<Input type="text" placeholder="아이디" value={store.id} onChange={(e) => store.setId(e.target.value)} />
+					<Input
+						type="text"
+						placeholder="이메일"
+						value={store.email}
+						onChange={(e) => store.setEmail(e.target.value)}
+					/>
 					<Input
 						type="password"
 						placeholder="비밀번호"
-						value={store.pwd}
-						onChange={(e) => store.setPwd(e.target.value)}
+						value={store.password}
+						onChange={(e) => store.setPassword(e.target.value)}
 					/>
 				</div>
 
-				<LoginButton disabled={store.id.length === 0 || store.pwd.length === 0} onClick={handleLogin} />
+				<LoginButton disabled={store.email.length === 0 || store.password.length === 0} onClick={handleLogin} />
 			</div>
 		</div>
 	);
