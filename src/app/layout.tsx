@@ -1,10 +1,13 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import RootPage from './page';
+import HeaderPage from './page';
+import { SITE_ENV, SITE_TITLE } from '@constants/consts';
 
 export const metadata: Metadata = {
-	title: 'book-piseo',
-	description: '',
+	title: {
+		default: `${SITE_TITLE}`,
+		template: `%s | ${SITE_ENV}`,
+	},
 };
 
 // MARK :: RootLayout은 서버 -> 클라이언트 컴포넌트가 될 수 없음
@@ -19,8 +22,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				// @ts-ignore
 				precedence="default"
 			/>
-			<body className="">
-				<RootPage>{children}</RootPage>
+			<body className="overflow-hidden">
+				<div className="w-screen h-full relative">
+					<HeaderPage />
+					<main className={`w-screen h-screen overflow-x-hidden overflow-y-auto`}>{children}</main>
+				</div>
 			</body>
 		</html>
 	);

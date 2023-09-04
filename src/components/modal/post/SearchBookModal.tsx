@@ -1,11 +1,10 @@
 import { ModalType, useModalActions, useSearchBookState } from '@/stores/useModalStore';
 import { BookInfo } from '@models/Content';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ModalContainer } from '../common/ModalContainer';
-import { ModalContent } from '../common/ModalContent';
 import { ModalHeader } from '../common/ModalHeader';
-import { useGetNaverSearchList } from '@/api/query/useGetNaverBookData';
-import { getNaverSearchList } from '@/api/getNaverSearchList';
+import axios from 'axios';
+import { BookSearchInput } from '@components/elements/inputs/BookSearchInput';
 
 export const SearchBookModal = () => {
 	const [bookinfo, setBookInfo] = useState<Partial<BookInfo>>({});
@@ -13,25 +12,39 @@ export const SearchBookModal = () => {
 	const changeModalState = useModalActions();
 	const [searchValue, setSearchValue] = useState({ query: '' });
 
-	useEffect(() => {
-		getNaverSearchList(searchValue);
-	}, [searchValue]);
-
 	const handleCloseModal = () => {
 		changeModalState(ModalType.searchBook);
 	};
+
+	const getNaverBookList = async () => {
+		try {
+			{
+				const response = await axios.get(`api/proxy/v1/search/book?query=${searchValue.query}`);
+				setBookInfo(response.data.items);
+			}
+		} catch (e) {
+			console.error(e);
+		}
+	};
+
+	const handleInputKeyUp = async (e: any) => {
+		if (searchValue.query.trim() === '') {
+			setBookInfo({});
+		}
+		if (e.key === 'Enter') {
+			await getNaverBookList();
+		}
+	};
+
+	const handleInputChange = (e: any) => {
+		setSearchValue({ query: e.target.value });
+	};
+
 	return (
 		<ModalContainer isOpen={isModalOpen}>
 			<ModalHeader title="도서 검색" onClose={handleCloseModal} />
 			<div className="rem:w-[800px] rem:h-[790px] flex justify-center">
-				<div className="w-full rem:h-[80px] bg-light-grey-1 flex items-center rem:px-[30px]">
-					<input
-						className="w-full  bg-light-grey-1 text-s3_medium focus:outline-none"
-						onChange={(e) => {
-							setSearchValue({ query: e.target.value });
-						}}
-					/>
-				</div>
+				<BookSearchInput handleInputKeyUp={handleInputKeyUp} handleInputChange={handleInputChange} />
 			</div>
 		</ModalContainer>
 	);
