@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { IcOtherReadBook } from '@assets/icons';
 import BookReview from '@components/home/BookReview';
@@ -8,6 +8,7 @@ import CarouselArrowButton from '@components/elements/buttons/CarouselArrowButto
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@stores/useAuthStore';
 import useStore from '@hooks/useStore';
+import { getOtherTeamContents } from '@apis/homeApi';
 
 export type ContentList = {
 	contentId: string;
@@ -125,6 +126,10 @@ function HomePage() {
 	const router = useRouter();
 	const store = useStore(useAuthStore, (state) => state);
 	const [contentList, setContentList] = useState<ContentList[]>(InitContentList);
+
+	useEffect(() => {
+		// getOtherTeamContents({ pageNumber: 0 }).then((res) => console.log(res));
+	}, []);
 
 	const handleBookReview = (contentId: string) => {
 		router.push('/content');
