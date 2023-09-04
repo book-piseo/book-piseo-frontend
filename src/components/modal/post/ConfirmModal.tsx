@@ -1,3 +1,4 @@
+'use client';
 import { ModalType, useModalActions, usePostConfirmState } from '@/stores/useModalStore';
 import { ModalContainer } from '../common/ModalContainer';
 import { ModalContent } from '../common/ModalContent';
