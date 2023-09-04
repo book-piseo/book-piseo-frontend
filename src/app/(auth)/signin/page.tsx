@@ -17,9 +17,10 @@ function Login() {
 	if (!store) return <></>;
 
 	const handleLogin = async () => {
-		// const result = await login({ email: store.email, password: store.password });
-		store.setIsLogin(true);
-		router.push('/home');
+		const result = await login({ email: store.email, password: store.password });
+		console.log({ result });
+		// store.setIsLogin(true);
+		// router.push('/home');
 	};
 
 	return (

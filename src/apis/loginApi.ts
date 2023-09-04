@@ -8,9 +8,6 @@ import { LoginRequest } from '@models/user.model';
 export const login = async (params: LoginRequest) => {
 	const response = await fetch('/api/login', {
 		method: 'POST',
-		headers: {
-			'Content-type': 'application/json',
-		},
 		body: JSON.stringify(params),
 	});
 
