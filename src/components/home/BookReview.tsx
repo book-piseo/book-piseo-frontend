@@ -1,137 +1,58 @@
 'use client';
+import { IcBook } from '@assets/icons';
+import EmptyBookCoverImage from '@components/common/EmptyBookCoverImage';
 import React, { useState } from 'react';
-import BookReviewItem from './BookReviewItem';
-import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import AvatarProfile from '@components/common/AvatarProfile';
+import { ContentList } from '@/app/home/page';
 
-export type ContentList = {
-	contentId: string;
-	title: string;
-	content: string;
-	userInfo: {
-		userId: string;
-		userName: string;
-		userImgUrl?: string;
-		teamInfo: {
-			teamId: string;
-			teamName: string;
-		};
-	};
-	bookInfo: {
-		title: string;
-		imgUrl?: string;
-	};
+type BookReviewItemProps = {
+	content: ContentList;
+	onClick: () => void;
 };
 
-const InitContentList = [
-	{
-		contentId: '1',
-		title: '작가의 경험에 빗대어 나의 여행의 이유를 생각하게 하는 책',
-		content: '',
-		userInfo: {
-			userId: '12332312',
-			userName: '웬디',
-			userImgUrl: '',
-			teamInfo: {
-				teamId: '2',
-				teamName: '독서클럽: 책을 피서',
-			},
-		},
-		bookInfo: {
-			title: '1984',
-			imgUrl: '',
-		},
-	},
-	{
-		contentId: '2',
-		title: '책 이름처럼 멋진 신세계! 제목은 두줄까지만 노출하고 오버되면 말줄임입니다.',
-		content: `What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
-		userInfo: {
-			userId: '12332312',
-			userName: '데이지',
-			userImgUrl: '',
-			teamInfo: {
-				teamId: '1',
-				teamName: '클라이밍 하다',
-			},
-		},
-		bookInfo: {
-			title: '여행의 이유',
-			imgUrl: '',
-		},
-	},
-	{
-		contentId: '3',
-		title: '풋살은 즐거워',
-		content: '',
-		userInfo: {
-			userId: '12332312',
-			userName: '작성자 이름',
-			userImgUrl: '',
-			teamInfo: {
-				teamId: '1',
-				teamName: '샤커즈',
-			},
-		},
-		bookInfo: {
-			title: '풋살은 즐거워',
-			imgUrl: '',
-		},
-	},
-	{
-		contentId: '3',
-		title: '(쏙쏙 들어오는) 함수형 코딩 심플한 코드로 복잡한 소프트웨어 길들이기 - 에릭노먼드 지음, 김은민 옮김',
-		content: '',
-		userInfo: {
-			userId: '12332312',
-			userName: '작성자 이름',
-			userImgUrl: '',
-			teamInfo: {
-				teamId: '1',
-				teamName: '에릭노먼드 지음, 김은민 옮김',
-			},
-		},
-		bookInfo: {
-			title: '(쏙쏙 들어오는) 함수형 코딩 심플한 코드로 복잡한 소프트웨어 길들이기 - 에릭노먼드 지음, 김은민 옮김',
-			imgUrl: '',
-		},
-	},
-	{
-		contentId: '3',
-		title: '프론트엔트: 타입스크립트 스터디',
-		content: '',
-		userInfo: {
-			userId: '12332312',
-			userName: '웬디',
-			userImgUrl: '',
-			teamInfo: {
-				teamId: '1',
-				teamName: '프론트엔트: 타입스크립트 스터디',
-			},
-		},
-		bookInfo: {
-			title: '이펙티브 타입스크립트',
-			imgUrl: '',
-		},
-	},
-];
+const BookReview = ({ content, onClick }: BookReviewItemProps) => {
+	const [isHovering, setIsHovering] = useState(false);
 
-const BookReview = () => {
-	const router = useRouter();
-	const [contentList, setContentList] = useState<ContentList[]>(InitContentList);
+	const handleMouseOver = () => {
+		setIsHovering(true);
+	};
 
-	const handleBookReview = (contentId: string) => {
-		router.push('/content');
+	const handleMouseOut = () => {
+		setIsHovering(false);
 	};
 
 	return (
-		<div className="grid w-full h-fit grid-cols-4 rem:gap-x-[40px] rem:gap-y-[80px]">
-			{contentList.map((content, index) => (
-				<BookReviewItem
-					key={`book-review-item__${index}`}
-					content={content}
-					onClick={() => handleBookReview(content.contentId)}
-				/>
-			))}
+		<div className="flex flex-col w-full rem:gap-[20px]" onClick={onClick}>
+			{/* 책 커버 이미지 */}
+			<div className="relative cursor-pointer" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+				<div className={`absolute w-full rem:h-[470px] ${isHovering ? 'visible' : 'invisible'}`}>
+					<div className={`absolute w-[80%] h-fit bg-white rounded-br-[16px] z-20`}>
+						<div className="flex items-start rem:p-[14px] rem:gap-[8px]">
+							<Image src={IcBook} alt="도서 제목" className="rem:w-[24px] rem:h-[24px]" />
+							<div className="flex items-center rem:h-min[24px]">
+								<p className="rem:w-max[57px] text-p1_semibold text-dark-grey-1 text-ellipsis-line-3">
+									{content.bookInfo.title}
+								</p>
+							</div>
+						</div>
+					</div>
+					<div className={`absolute w-full h-full rounded-[16px] bg-primary opacity-[0.6] z-10`}></div>
+				</div>
+				<EmptyBookCoverImage />
+			</div>
+
+			<div className="flex flex-col rem:gap-[10px] rem:leading-[22px]">
+				<div className="rem:w-max[305px] text-s3_semibold text-dark-grey-1 text-ellipsis-line-2">{content.title}</div>
+
+				{/* 리뷰 정보 */}
+				<AvatarProfile userInfo={content.userInfo} />
+
+				{/* 팀 정보 */}
+				<div className="rem:w-max[305px] text-p2_medium text-light-grey-2 text-ellipsis-line-1">
+					{content.userInfo.teamInfo.teamName}
+				</div>
+			</div>
 		</div>
 	);
 };
