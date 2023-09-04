@@ -2,22 +2,22 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
 type AuthState = {
-	id: string;
-	pwd: string;
+	email: string;
+	password: string;
 	autoLogin: boolean;
 	isLogin: boolean;
 };
 
 type AuthAction = {
-	setId: (id: string) => void;
-	setPwd: (pwd: string) => void;
-	setAutoLogin: (autoLogin: boolean) => void;
-	setIsLogin: (isLogin: boolean) => void;
+	setEmail: (value: string) => void;
+	setPassword: (value: string) => void;
+	setAutoLogin: (value: boolean) => void;
+	setIsLogin: (value: boolean) => void;
 };
 
 const initialState = {
-	id: '',
-	pwd: '',
+	email: '',
+	password: '',
 	autoLogin: false,
 	isLogin: false,
 };
@@ -27,12 +27,12 @@ export const useAuthStore = create<AuthState & AuthAction>()(
 		persist(
 			(set) => ({
 				...initialState,
-				setId: (id: string) => set({ id }),
-				setPwd: (pwd: string) => set({ pwd }),
-				setAutoLogin: (autoLogin: boolean) => set({ autoLogin }),
-				setIsLogin: (isLogin: boolean) => set({ isLogin }),
+				setEmail: (value: string) => set({ email: value }),
+				setPassword: (value: string) => set({ password: value }),
+				setAutoLogin: (value: boolean) => set({ autoLogin: value }),
+				setIsLogin: (value: boolean) => set({ isLogin: value }),
 			}),
-			{ name: 'auth-store' },
+			{ name: 'LOGIN_AUTH_STORE' },
 		),
 	),
 );

@@ -27,6 +27,7 @@
 			"@models/*": ["./src/models/*"],
 			"@utils/*": ["./src/utils/*"],
 			"@stores/*": ["./src/stores/*"],
+			"@apis/*": ["./src/apis/*"],
 			"@/*": ["./src/*"]
 		}
 	},

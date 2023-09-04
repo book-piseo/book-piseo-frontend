@@ -1,9 +1,13 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import HeaderPage from './page';
+import { SITE_ENV, SITE_TITLE } from '@constants/consts';
 
 export const metadata: Metadata = {
-	title: 'book-piseo',
+	title: {
+		default: `${SITE_TITLE}`,
+		template: `%s | ${SITE_ENV}`,
+	},
 };
 
 // MARK :: RootLayout은 서버 -> 클라이언트 컴포넌트가 될 수 없음
