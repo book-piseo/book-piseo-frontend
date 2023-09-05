@@ -34,7 +34,7 @@ const LatestTeamBookReview = () => {
 							<div className="rem:px-[12px] border-l-[4px] border-dark-grey-1 text-dark-grey-1 text-s3_medium rem:leading-[22px]">
 								책을 피서 운영팀
 							</div>
-							<LinkButton pathUrl="/team" className="flex items-center rem:gap-[6rem]">
+							<LinkButton pathUrl={`/team/${'qwuqiwe12312312'}`} className="flex items-center rem:gap-[6rem]">
 								<span>전체 보기</span>
 								<Image src={IcArrowUpLight} alt="전체 보기" className="rem:w-[22px] rem:h-[22px]" />
 							</LinkButton>
@@ -48,11 +48,7 @@ const LatestTeamBookReview = () => {
 							</div>
 
 							<div className="flex items-center rem:gap-[10px] text-dark-grey-2 text-p1_regular">
-								<AvatarProfile
-									avatarSize="medium"
-									userInfo={{ userId: '1231231', userName: '작성자 이름', userImgUrl: '' }}
-									labelStyle="text-dark-grey-2 text-p1_regular"
-								/>
+								<AvatarProfile avatarSize="medium" userInfo={undefined} labelStyle="text-dark-grey-2 text-p1_regular" />
 								<span>|</span>
 								<span>YYYY.MM.DD</span>
 							</div>

@@ -1,12 +1,17 @@
 'use client';
-import { IcArrowUpLight, IcTeamInfo } from '@assets/icons';
 import React from 'react';
+import { IcArrowUpLight, IcTeamInfo } from '@assets/icons';
 import Image from 'next/image';
-import { LinkButton } from '@components/elements/buttons/LinkButton';
 import RoundIconButton from '@components/elements/buttons/RoundIconButton';
 import Avatar from '@components/elements/avatars/Avatar';
+import { TeamDetailInfoReponse } from '@models/team.model';
 
-const TeamInfo = () => {
+type TeamInfoProps = {
+	teamInfo?: TeamDetailInfoReponse;
+};
+
+const TeamInfo = ({ teamInfo }: TeamInfoProps) => {
+	const profileImgs = teamInfo?.teamMembers?.map((member) => member.profileImg || '');
 	const handleTeamMembersInfoModal = () => {
 		// console.log('여기요>>');
 	};
@@ -17,10 +22,8 @@ const TeamInfo = () => {
 
 			{/* 팀 소개글 */}
 			<div className="flex flex-col rem:gap-[16px]">
-				<h2 className="text-dark-grey-1 text-h2_bold leading-[normal]">책을 피서 운영팀</h2>
-				<p className="text-dark-grey-1 text-p1_regular">
-					일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십
-				</p>
+				<h2 className="text-dark-grey-1 text-h2_bold leading-[normal]">{teamInfo?.teamName}</h2>
+				{teamInfo?.teamDescription && <p className="text-dark-grey-1 text-p1_regular">{teamInfo?.teamDescription}</p>}
 			</div>
 
 			{/* 팀 멤버 정보 */}
@@ -28,7 +31,7 @@ const TeamInfo = () => {
 				<div className="flex flex-1 items-center justify-between rem:pr-[32px]">
 					<div className="flex gap-[4px]">
 						<span className="text-dark-grey-2 text-s3_medium">팀원</span>
-						<span className="text-primary text-s3_medium">4</span>
+						<span className="text-primary text-s3_medium">{teamInfo?.teamMembers?.length}</span>
 					</div>
 					<RoundIconButton
 						label="전체 보기"
@@ -39,9 +42,9 @@ const TeamInfo = () => {
 				<div className="flex flex-1 items-center justify-between rem:pl-[32px]">
 					<span className="text-dark-grey-2 text-s3_medium">팀 마스터</span>
 					<div className="flex rem:gap-[5px]">
-						<Avatar path={''} size="medium" />
-						<Avatar path={''} size="medium" />
-						<Avatar path={''} size="medium" />
+						{profileImgs?.map((profileImg, index) => (
+							<Avatar key={`team-masters__${index}`} path={profileImg} size="medium" />
+						))}
 					</div>
 				</div>
 			</div>

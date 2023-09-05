@@ -1,7 +1,7 @@
 'use client';
 import { LogoGnb } from '@assets/icons';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IcWrite } from '@assets/icons';
 import Link from 'next/link';
 import { useAuthStore } from '@stores/useAuthStore';
@@ -11,22 +11,29 @@ import RoundButton from '@components/elements/buttons/RoundButton';
 import { useRouter, usePathname } from 'next/navigation';
 import Avatar from '@components/elements/avatars/Avatar';
 import { ModalType, useModalActions } from '@stores/useModalStore';
+import { useUserInfoStore } from '@stores/useUserInfoStore';
 
-export default function HeaderPage() {
+export default function Page() {
 	const router = useRouter();
 	const pathName = usePathname();
 	const store = useStore(useAuthStore, (state) => state);
+	const userStore = useStore(useUserInfoStore, (state) => state);
 	const changeModalState = useModalActions();
 
-	if (pathName === '/') {
-		router.push('/home');
-	}
-
-	if (pathName === '/signin') return <></>;
+	useEffect(() => {
+		// NOTE ::: 루트로 접근 시, home으로 이동
+		if (pathName === '/') {
+			router.push('/home');
+		}
+		if (pathName === '/signin' && !store?.isLogin) {
+			router.push('/signin');
+		}
+	}, [pathName, store?.isLogin]);
 
 	const handleAvatar = () => {
-		store && store.setIsLogin(false);
-		router.push('/home');
+		store && store.clearAuth();
+		userStore && userStore.clearUserInfo();
+		router.push('/');
 	};
 
 	const handleSaveButton = () => {
@@ -58,7 +65,7 @@ export default function HeaderPage() {
 						)}
 						{/* MARK :: AVATAR  */}
 						<div className="cursor-pointer" onClick={handleAvatar} title="로그아웃">
-							<Avatar path="" />
+							<Avatar path={(userStore && userStore?.userInfo?.profileImg) || ''} />
 						</div>
 					</>
 				)}
