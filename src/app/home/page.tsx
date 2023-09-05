@@ -10,19 +10,34 @@ import { useAuthStore } from '@stores/useAuthStore';
 import useStore from '@hooks/useStore';
 import { getOtherTeamContents } from '@apis/homeApi';
 import { getUserInfo } from '@apis/userInfoApi';
+import { PageContentsInfoReponse } from '@models/contents.model';
+import { useUserInfoStore } from '@stores/useUserInfoStore';
 
 function HomePage() {
 	const router = useRouter();
 	const store = useStore(useAuthStore, (state) => state);
-	const [pageNumber, setPageNumber] = useState(0);
+	const userStore = useStore(useUserInfoStore, (state) => state);
 
-	// const userInfoData = getUserInfo();
-	// const otherTeamContentsData = getOtherTeamContents({ pageNumber });
-	// const [userInfo, otherTeamContents] = await Promise.all([userInfoData, otherTeamContentsData]);
-	// console.log({ userInfo, otherTeamContents });
+	const [pageNumber, setPageNumber] = useState(0);
+	const [otherTeamContents, setOtherTeamContents] = useState<PageContentsInfoReponse | null>(null);
+
+	console.log({ otherTeamContents });
+
+	useEffect(() => {
+		fetchHomeData();
+	}, []);
+
+	const fetchHomeData = async () => {
+		const userInfoData = getUserInfo();
+		const otherTeamContentsData = getOtherTeamContents({ pageNumber });
+		const [userInfo, otherTeamContents] = await Promise.all([userInfoData, otherTeamContentsData]);
+
+		userStore && userStore.setUserInfo(userInfo);
+		setOtherTeamContents(otherTeamContents);
+	};
 
 	const handleBookReview = (contentId: string) => {
-		router.push('/content');
+		router.push(`/content?id=${contentId}`);
 	};
 
 	return (
@@ -50,13 +65,21 @@ function HomePage() {
 				</div>
 				{/* 리뷰 리스트 */}
 				<div className="grid w-full h-fit grid-cols-4 rem:gap-x-[40px] rem:gap-y-[80px]">
-					{/* {contentList.map((content, index) => (
-						<BookReview
-							key={`book-review-item__${index}`}
-							content={content}
-							onClick={() => handleBookReview(content.contentId)}
-						/>
-					))} */}
+					{otherTeamContents && otherTeamContents?.content?.length == 0 && (
+						<div className="flex flex-col w-full rem:h-[400px] items-center justify-center rem:gap-[24px]">
+							<div className="rem:w-[175px] rem:h-[175px] rounded-full bg-primary-sub"></div>
+							<p className="text-dark-grey-2 text-s3_medium">등록된 게시물이 없습니다.</p>
+						</div>
+					)}
+					{otherTeamContents &&
+						otherTeamContents?.content?.length > 0 &&
+						otherTeamContents?.content?.map((item, index) => (
+							<BookReview
+								key={`book-review-item__${index}`}
+								content={item}
+								onClick={() => handleBookReview(item.contentsId)}
+							/>
+						))}
 				</div>
 			</div>
 		</>

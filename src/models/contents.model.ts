@@ -1,4 +1,5 @@
 import { BookInfo } from './book.model';
+import { PageableResponse } from './page.model';
 import { WriterInfoResponse } from './user.model';
 
 /**
@@ -22,3 +23,5 @@ export interface ContentsSaveRequest {
 	bookInfo: BookInfo;
 	teamId: string;
 }
+
+export type PageContentsInfoReponse = PageableResponse & { content: ContentsInfoResponse[] };
