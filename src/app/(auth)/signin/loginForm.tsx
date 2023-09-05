@@ -19,7 +19,7 @@ const LoginForm = () => {
 		await login({ email: store.email, password: store.password }).then(async (res) => {
 			if (res?.result === 200) {
 				store.setIsLogin(true);
-				router.push('/');
+				router.push('/home');
 			} else if (res?.result === 401) {
 				alert(res.data.errorMessage);
 			}
