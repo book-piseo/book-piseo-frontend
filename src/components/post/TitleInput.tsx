@@ -1,7 +1,7 @@
-import { useContentAction } from '@/stores/useContentStore';
+import { useSetPostStore } from '@stores/usePostStore';
 
 export const TitleInput = () => {
-	const changeContentState = useContentAction();
+	const setPostStore = useSetPostStore();
 
 	return (
 		<input
@@ -11,7 +11,7 @@ export const TitleInput = () => {
          focus:outline-none hover:border-[#0C2374] focus:border-[#0C2374]"
 			placeholder="제목"
 			onChange={(e) => {
-				changeContentState({ contentsTitle: e.currentTarget.value });
+				setPostStore({ contentsTitle: e.currentTarget.value });
 			}}
 		/>
 	);

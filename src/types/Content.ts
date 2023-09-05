@@ -15,5 +15,5 @@ export type Contents = {
 	contentsText: string;
 	bookInfo: BookInfo;
 	teamId: string;
-	teamName: string;
+	teamName?: string;
 };

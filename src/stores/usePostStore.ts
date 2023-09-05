@@ -2,9 +2,9 @@
 import { Contents } from '@/types/Content';
 import { create } from 'zustand';
 
-type ContentState = { setContent: (value: Record<string, unknown>) => void } & Contents;
+export type PostStore = { setPostStore: (value: Record<string, unknown>) => void } & Contents;
 
-export const useContentStore = create<ContentState>((set) => ({
+export const usePostStore = create<PostStore>((set) => ({
 	contentsTitle: '',
 	contentsText: '',
 	bookInfo: {
@@ -20,9 +20,8 @@ export const useContentStore = create<ContentState>((set) => ({
 	},
 	teamId: '',
 	teamName: '',
-	setContent: (value: Record<string, unknown>) => {
+	setPostStore: (value: Record<string, unknown>) => {
 		set((state) => ({ ...state, ...value }));
 	},
 }));
-
-export const useContentAction = () => useContentStore((state) => state.setContent);
+export const useSetPostStore = () => usePostStore((state) => state.setPostStore);
