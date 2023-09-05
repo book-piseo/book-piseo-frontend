@@ -8,7 +8,7 @@ import Avatar from '@components/elements/avatars/Avatar';
 
 const TeamInfo = () => {
 	const handleTeamMembersInfoModal = () => {
-		console.log('여기요>>');
+		// console.log('여기요>>');
 	};
 
 	return (

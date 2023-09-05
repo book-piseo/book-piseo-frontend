@@ -12,7 +12,6 @@ export const getOtherTeamContents = async ({ pageNumber }: { pageNumber: number 
 		redirect: 'follow',
 		referrer: 'no-referrer',
 	});
-	console.log({ response });
 	return response.json();
 };
 
