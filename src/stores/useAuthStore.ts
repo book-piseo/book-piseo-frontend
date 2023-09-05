@@ -13,6 +13,7 @@ type AuthAction = {
 	setPassword: (value: string) => void;
 	setAutoLogin: (value: boolean) => void;
 	setIsLogin: (value: boolean) => void;
+	clearAuth: () => void;
 };
 
 const initialState = {
@@ -31,6 +32,7 @@ export const useAuthStore = create<AuthState & AuthAction>()(
 				setPassword: (value: string) => set({ password: value }),
 				setAutoLogin: (value: boolean) => set({ autoLogin: value }),
 				setIsLogin: (value: boolean) => set({ isLogin: value }),
+				clearAuth: () => set(initialState),
 			}),
 			{ name: 'LOGIN_AUTH_STORE' },
 		),

@@ -1,16 +1,3 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier"],
-  "extends": ["plugin:eslint:recommended", "google", "prettier"],
-  "parserOptions": {
-    "ecmaVersion": 2016,
-    "sourceType": "module"
-  },
-  "env": {
-    "browser": true,
-    "es6": true
-  },
-  "rules": {
-    "prettier/prettier": ["error"]
-  }
+	"extends": ["next", "prettier"]
 }

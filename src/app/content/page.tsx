@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 
 const Page = () => {
 	const searchParams = useSearchParams();
-	const paramId = searchParams.get('id');
+	const paramId = searchParams === null ? '' : searchParams.get('id');
 
 	return (
 		<div className="rem:pt-[100px] rem:mb-[132px] rem:px-[350px] h-full">
