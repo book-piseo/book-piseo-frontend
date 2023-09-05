@@ -9,8 +9,8 @@ export const getNaverBookList = (query: string) => {
 		cache: 'no-store',
 		headers: {
 			accept: 'application/json, text/plain, */*',
-			'X-Naver-Client-Id': process.env.NEXT_PUBLIC_NAVER_CLIENT_ID,
-			'X-Naver-Client-Secret': process.env.NEXT_PUBLIC_NEXT_PUBLIC_NAVER_CLIENT_KEY,
+			'X-Naver-Client-Id': process.env.NEXT_PUBLIC_NAVER_CLIENT_ID || '',
+			'X-Naver-Client-Secret': process.env.NEXT_PUBLIC_NEXT_PUBLIC_NAVER_CLIENT_KEY || '',
 		},
 	})
 		.then((res) => {
@@ -30,7 +30,7 @@ export const getNaverBookList = (query: string) => {
 /*
  * 게시글 작성
  * */
-export const postContent = async ({ params }: ContentsSaveRequest) => {
+export const postContent = async (params: ContentsSaveRequest) => {
 	return fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contents`, {
 		method: 'POST',
 		headers: {
