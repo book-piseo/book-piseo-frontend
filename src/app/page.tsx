@@ -33,6 +33,8 @@ export default function HeaderPage() {
 		changeModalState(ModalType.postConfirm);
 	};
 
+	const isPostPage = pathName === '/post';
+
 	return (
 		<header className="page-header fixed top-0 flex w-screen rem:h-[80px] items-center justify-between rem:px-[120px] bg-white z-50">
 			<Link href="/home">
@@ -45,12 +47,15 @@ export default function HeaderPage() {
 					</Link>
 				) : (
 					<>
-						{/* MARK :: SAVE BUTTON */}
-						{pathName === '/post' && <RoundButton label="저장" disabled={false} onClick={handleSaveButton} />}
-						{/*// MARK :: WRITING BUTTON*/}
-						<Link href="/post">
-							<IconButton icon={IcWrite} label="글쓰기" />
-						</Link>
+						{isPostPage ? (
+							//  MARK :: SAVE BUTTON
+							<RoundButton label="저장" disabled={false} onClick={handleSaveButton} />
+						) : (
+							// MARK :: WRITING BUTTON
+							<Link href="/post">
+								<IconButton icon={IcWrite} label="글쓰기" />
+							</Link>
+						)}
 						{/* MARK :: AVATAR  */}
 						<div className="cursor-pointer" onClick={handleAvatar} title="로그아웃">
 							<Avatar path="" />
