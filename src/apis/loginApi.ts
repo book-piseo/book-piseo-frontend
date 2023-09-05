@@ -10,7 +10,7 @@ export interface ApiResult {
  * @로그인
  */
 export const login = async (params: LoginRequest) => {
-	return await fetch(process.env.NEXT_PUBLIC_API_URL + '/api/login', {
+	return await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
