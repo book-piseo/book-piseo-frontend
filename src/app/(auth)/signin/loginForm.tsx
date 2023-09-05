@@ -1,5 +1,6 @@
 'use client';
 import { login } from '@apis/loginApi';
+import { getUserInfo } from '@apis/userInfoApi';
 import { LoginButton } from '@components/elements/buttons/LoginButton';
 import Input from '@components/forms/inputGroups/Input';
 import useStore from '@hooks/useStore';
@@ -8,16 +9,14 @@ import { useAuthStore } from '@stores/useAuthStore';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-type LoginFormProps = {};
-
-const LoginForm = ({}: LoginFormProps) => {
+const LoginForm = () => {
 	const router = useRouter();
 	const store = useStore(useAuthStore, (state) => state);
 
 	const handleLogin = async () => {
 		if (!store) return;
 		if (store.email.length === 0 || store.password.length === 0) return;
-		await login({ email: store.email, password: store.password }).then((res) => {
+		await login({ email: store.email, password: store.password }).then(async (res) => {
 			if (res?.result === 200) {
 				store.setIsLogin(true);
 				router.push('/');
