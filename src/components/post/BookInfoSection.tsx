@@ -1,18 +1,59 @@
-'use client';
-
 import { useModalStore, ModalType } from '@/stores/useModalStore';
+import { useContentAction, useContentStore } from '@stores/useContentStore';
+import Image from 'next/image';
 
 export const BookInfoSection = () => {
 	const { changeModalState } = useModalStore();
+	const state = useContentStore();
+	const changeContentState = useContentAction();
 
-	return (
+	const hasBookInfo = Boolean(state.bookInfo.isbn.length);
+
+	const { title, image, publisher, author } = state.bookInfo;
+
+	return hasBookInfo ? (
+		<div className="rem:h-[219px] rem:py-[28px] rem:px-[40px] bg-[#F3F4F8] rounded-[20px] flex justify-between">
+			<div className="flex rem:gap-[40px]">
+				<div className="rem:w-[105px] rem:h-[163px] relative">
+					<Image src={image} alt="bookCover" fill unoptimized />
+				</div>
+				<div className="flex flex-col rem:gap-[20px] ">
+					<div className="text-s1_semibold">{title}</div>
+					<div className="flex flex-col rem:gap-[6px] text-p1_medium">
+						<div>{author}</div>
+						<div className="text-dark-grey-2">{publisher}</div>
+					</div>
+				</div>
+			</div>
+			<div
+				className="text-[#EC7F7F] text-s3_medium cursor-pointer"
+				onClick={() => {
+					changeContentState({
+						bookInfo: {
+							title: '',
+							link: '',
+							image: '',
+							author: '',
+							discount: '',
+							publisher: '',
+							pubdate: '',
+							isbn: '',
+							description: '',
+						},
+					});
+				}}
+			>
+				삭제
+			</div>
+		</div>
+	) : (
 		<div
-			className="rem:h-[129px] rem:pt-[50px] text-s1_semibold text-light-grey-2 rem:pl-[40px] bg-light-grey-1 rounded-[20px] cursor-pointer"
+			className="h-full rem:py-[50px] rem:px-[40px] items-center bg-light-grey-1 rounded-[20px] cursor-pointer"
 			onClick={() => {
 				changeModalState(ModalType.searchBook);
 			}}
 		>
-			+ 어떤 책을 읽었나요?
+			<div className="text-s1_semibold text-light-grey-2">+ 어떤 책을 읽었나요?</div>
 		</div>
 	);
 };

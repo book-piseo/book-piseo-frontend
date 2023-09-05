@@ -5,10 +5,18 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const nextConfig = {
-	reactStrictMode: true,
 	images: {
 		disableStaticImages: true,
+		// 외부 이미지를 가져오기 위한 설정
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'shopping-phinf.pstatic.net',
+			},
+		],
 	},
+	reactStrictMode: true,
+
 	redirect: async () => {
 		return [
 			{
@@ -35,5 +43,4 @@ const nextConfig = {
 		return config;
 	},
 };
-
 module.export = nextConfig;

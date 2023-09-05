@@ -1,6 +1,7 @@
-import { create } from 'zustand'
+'use client';
+import { create } from 'zustand';
 
-type Type = 'teamMember' | 'postConfirm' | 'selectTeam' | 'searchBook'
+type Type = 'teamMember' | 'postConfirm' | 'selectTeam' | 'searchBook';
 
 /**
  * @teamMember 팀원 선택
@@ -13,15 +14,15 @@ export const ModalType = {
 	postConfirm: 'postConfirm',
 	selectTeam: 'selectTeam',
 	searchBook: 'searchBook',
-} as const
+} as const;
 
 type ModalState = {
-	teamMember: boolean
-	postConfirm: boolean
-	selectTeam: boolean
-	searchBook: boolean
-	changeModalState: (type: Type) => void
-}
+	teamMember: boolean;
+	postConfirm: boolean;
+	selectTeam: boolean;
+	searchBook: boolean;
+	changeModalState: (type: Type) => void;
+};
 
 export const useModalStore = create<ModalState>((set) => ({
 	teamMember: false,
@@ -29,13 +30,13 @@ export const useModalStore = create<ModalState>((set) => ({
 	selectTeam: false,
 	searchBook: false,
 	changeModalState: (type: Type) => {
-		set((state) => ({ ...state, [type]: !state[type] }))
+		set((state) => ({ ...state, [type]: !state[type] }));
 	},
-}))
+}));
 
-export const useModalActions = () => useModalStore((state) => state.changeModalState)
+export const useModalActions = () => useModalStore((state) => state.changeModalState);
 
-export const useTeamMemberState = () => useModalStore((state) => state.teamMember)
-export const usePostConfirmState = () => useModalStore((state) => state.postConfirm)
-export const useSelectTeamState = () => useModalStore((state) => state.selectTeam)
-export const useSearchBookState = () => useModalStore((state) => state.searchBook)
+export const useTeamMemberState = () => useModalStore((state) => state.teamMember);
+export const usePostConfirmState = () => useModalStore((state) => state.postConfirm);
+export const useSelectTeamState = () => useModalStore((state) => state.selectTeam);
+export const useSearchBookState = () => useModalStore((state) => state.searchBook);

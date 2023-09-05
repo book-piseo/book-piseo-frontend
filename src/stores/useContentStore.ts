@@ -1,7 +1,8 @@
-import { Contents } from '@models/Content';
+'use client';
+import { Contents } from '@/types/Content';
 import { create } from 'zustand';
 
-type ContentState = { setContent: (value: Record<string, string>) => void } & Contents;
+type ContentState = { setContent: (value: Record<string, unknown>) => void } & Contents;
 
 export const useContentStore = create<ContentState>((set) => ({
 	contentsTitle: '',
@@ -19,7 +20,7 @@ export const useContentStore = create<ContentState>((set) => ({
 	},
 	teamId: '',
 	teamName: '',
-	setContent: (value: Record<string, string>) => {
+	setContent: (value: Record<string, unknown>) => {
 		set((state) => ({ ...state, ...value }));
 	},
 }));

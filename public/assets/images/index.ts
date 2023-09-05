@@ -1,5 +1,8 @@
 export { default as ImgHomeMain } from './img_home_main.png';
 export { default as ImgHomeMain2x } from './img_home_main2x.png';
 export { default as ImgHomeMainSVG } from './img-home-main.svg';
+export { default as ImgEmptyBookForModal } from './img_empty-book-for-modal.png';
+export { default as ImgEmptyResult } from './img_empty-result.png';
+export { default as ImgSearchResult } from './img_search-result.png';
 
 export { default as ImgBookCoverExample } from './img_book-cover-example.png';

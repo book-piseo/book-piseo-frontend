@@ -17,7 +17,7 @@ export const ContentBookInfo = () => {
 
 				<div className="bg-primary-sub w-full rem:py-[24px] rem:pr-[40px] rem:pl-[30px] rounded-[10px]">
 					<div className="text-s1_semibold">1984</div>
-					<div className="flex rem:gap-[10px] text-s3_medium text-dark-grey-1">
+					<div className="flex rem:gap-[10px] text-s3_medium text-dark-grey-1 text-ellipsis-line-1">
 						<span>저자</span>
 						<span>조지 오웰</span>
 						<span>・</span>

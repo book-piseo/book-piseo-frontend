@@ -1,3 +1,4 @@
+'use client';
 import { ModalType, useModalActions, useSelectTeamState } from '@/stores/useModalStore';
 import { ModalContainer } from '../common/ModalContainer';
 import { ModalHeader } from '../common/ModalHeader';
