@@ -1,5 +1,5 @@
 'use client';
-import { Contents } from '@models/Content';
+import { Contents } from '@/types/Content';
 import { create } from 'zustand';
 
 type ContentState = { setContent: (value: Record<string, unknown>) => void } & Contents;

@@ -10,11 +10,13 @@ import { IconButton } from '@components/elements/buttons/IconButton';
 import RoundButton from '@components/elements/buttons/RoundButton';
 import { useRouter, usePathname } from 'next/navigation';
 import Avatar from '@components/elements/avatars/Avatar';
+import { ModalType, useModalActions } from '@stores/useModalStore';
 
 export default function HeaderPage() {
 	const router = useRouter();
 	const pathName = usePathname();
 	const store = useStore(useAuthStore, (state) => state);
+	const changeModalState = useModalActions();
 
 	if (pathName === '/') {
 		router.push('/home');
@@ -25,6 +27,10 @@ export default function HeaderPage() {
 	const handleAvatar = () => {
 		store && store.setIsLogin(false);
 		router.push('/home');
+	};
+
+	const handleSaveButton = () => {
+		changeModalState(ModalType.postConfirm);
 	};
 
 	return (
@@ -40,28 +46,11 @@ export default function HeaderPage() {
 				) : (
 					<>
 						{/* MARK :: SAVE BUTTON */}
-						<RoundButton
-							label="저장"
-							disabled={false}
-							onClick={() => {
-								alert('확인');
-							}}
-						/>
-
-						{/* MARK :: SAVE BUTTON(DISBLAED) */}
-						<RoundButton
-							label="저장"
-							disabled={true}
-							onClick={() => {
-								alert('확인');
-							}}
-						/>
-
-						{/* MARK :: WRITING BUTTON */}
+						{pathName === '/post' && <RoundButton label="저장" disabled={false} onClick={handleSaveButton} />}
+						{/*// MARK :: WRITING BUTTON*/}
 						<Link href="/post">
 							<IconButton icon={IcWrite} label="글쓰기" />
 						</Link>
-
 						{/* MARK :: AVATAR  */}
 						<div className="cursor-pointer" onClick={handleAvatar} title="로그아웃">
 							<Avatar path="" />

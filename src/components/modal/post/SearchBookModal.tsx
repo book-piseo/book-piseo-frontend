@@ -1,6 +1,6 @@
 'use client';
 import { ModalType, useModalActions, useSearchBookState } from '@/stores/useModalStore';
-import { BookInfo } from '@models/Content';
+import { BookInfo } from '@/types/Content';
 import { useState } from 'react';
 import { ModalContainer } from '../common/ModalContainer';
 import { ModalHeader } from '../common/ModalHeader';
