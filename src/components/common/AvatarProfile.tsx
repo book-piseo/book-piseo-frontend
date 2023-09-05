@@ -1,9 +1,9 @@
 import Avatar from '@components/elements/avatars/Avatar';
-import { UserInfoDto } from '@models/user.model';
+import { UserInfoDto, UserSessionInfo, WriterInfoResponse } from '@models/user.model';
 import React from 'react';
 
 type ProfileProps = {
-	userInfo: UserInfoDto;
+	userInfo?: WriterInfoResponse | UserSessionInfo;
 	avatarSize?: 'small' | 'medium' | 'large';
 	labelStyle?: string;
 };
@@ -15,8 +15,8 @@ const AvatarProfile = ({
 }: ProfileProps) => {
 	return (
 		<div className="flex items-center rem:gap-[8px]">
-			<Avatar size={avatarSize} path={userInfo?.userImgUrl || ''} />
-			<label className={labelStyle}>{userInfo.userName}</label>
+			<Avatar size={avatarSize} path={userInfo?.profileImg || ''} />
+			<label className={labelStyle}>{userInfo?.userName}</label>
 		</div>
 	);
 };
