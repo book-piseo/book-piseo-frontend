@@ -77,6 +77,7 @@ export const SearchBookModal = () => {
 			<div className="flex flex-col rem:px-[65px] rem:py-[40px] overflow-y-scroll rem:gap-[28px]">
 				{resultBookList.map((info) => (
 					<div
+						key={info.isbn}
 						className="flex w-full h-full rem:gap-[40px] cursor-pointer"
 						onClick={() => {
 							changeContentState({ bookInfo: info });
