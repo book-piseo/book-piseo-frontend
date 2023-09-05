@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Logo } from '@assets/icons';
 import Link from 'next/link';
-import LoginForm from './loginForm';
+import LoginForm from '@components/auth/loginForm';
 
 async function Login() {
 	return (
@@ -11,7 +11,6 @@ async function Login() {
 				<Link href="/home" className="logo flex items-center justify-center rem:pb-[64px] ">
 					<Image src={Logo} alt="logo" className="rem:w-[170px] rem:h-[35px]" />
 				</Link>
-
 				<LoginForm />
 			</div>
 		</div>

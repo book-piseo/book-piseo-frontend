@@ -4,10 +4,10 @@ import EmptyBookCoverImage from '@components/common/EmptyBookCoverImage';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import AvatarProfile from '@components/common/AvatarProfile';
-import { ContentList } from '@/app/home/page';
+import { ContentsInfoResponse } from '@models/contents.model';
 
 type BookReviewItemProps = {
-	content: ContentList;
+	content: ContentsInfoResponse;
 	onClick: () => void;
 };
 
@@ -32,7 +32,7 @@ const BookReview = ({ content, onClick }: BookReviewItemProps) => {
 							<Image src={IcBook} alt="도서 제목" className="rem:w-[24px] rem:h-[24px]" />
 							<div className="flex items-center rem:h-min[24px]">
 								<p className="rem:w-max[57px] text-p1_semibold text-dark-grey-1 text-ellipsis-line-3">
-									{content.bookInfo.title}
+									{content?.bookInfo?.title}
 								</p>
 							</div>
 						</div>
@@ -43,14 +43,16 @@ const BookReview = ({ content, onClick }: BookReviewItemProps) => {
 			</div>
 
 			<div className="flex flex-col rem:gap-[10px] rem:leading-[22px]">
-				<div className="rem:w-max[305px] text-s3_semibold text-dark-grey-1 text-ellipsis-line-2">{content.title}</div>
+				<div className="rem:w-max[305px] text-s3_semibold text-dark-grey-1 text-ellipsis-line-2">
+					{content.contentsTitle}
+				</div>
 
 				{/* 리뷰 정보 */}
-				<AvatarProfile userInfo={content.userInfo} />
+				<AvatarProfile userInfo={content?.writerInfo} />
 
 				{/* 팀 정보 */}
 				<div className="rem:w-max[305px] text-p2_medium text-light-grey-2 text-ellipsis-line-1">
-					{content.userInfo.teamInfo.teamName}
+					{content?.teamName || ''}
 				</div>
 			</div>
 		</div>

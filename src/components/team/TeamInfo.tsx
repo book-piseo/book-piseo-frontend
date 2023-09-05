@@ -42,7 +42,9 @@ const TeamInfo = ({ teamInfo }: TeamInfoProps) => {
 				<div className="flex flex-1 items-center justify-between rem:pl-[32px]">
 					<span className="text-dark-grey-2 text-s3_medium">팀 마스터</span>
 					<div className="flex rem:gap-[5px]">
-						{profileImgs?.map((profileImg) => <Avatar path={profileImg} size="medium" />)}
+						{profileImgs?.map((profileImg, index) => (
+							<Avatar key={`team-masters__${index}`} path={profileImg} size="medium" />
+						))}
 					</div>
 				</div>
 			</div>

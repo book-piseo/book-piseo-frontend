@@ -10,7 +10,7 @@ const TeamPage = ({ params }: { params: { teamId: string } }) => {
 
 	useEffect(() => {
 		getTeamInfo({ teamId: params.teamId }).then((data) => setTeamInfo(data));
-	}, []);
+	}, [params.teamId]);
 
 	return (
 		<div className="rem:pt-[160px] rem:px-[350px]">

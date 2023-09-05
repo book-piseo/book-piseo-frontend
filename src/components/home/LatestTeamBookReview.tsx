@@ -48,11 +48,7 @@ const LatestTeamBookReview = () => {
 							</div>
 
 							<div className="flex items-center rem:gap-[10px] text-dark-grey-2 text-p1_regular">
-								<AvatarProfile
-									avatarSize="medium"
-									userInfo={{ userId: '1231231', userName: '작성자 이름', userImgUrl: '' }}
-									labelStyle="text-dark-grey-2 text-p1_regular"
-								/>
+								<AvatarProfile avatarSize="medium" userInfo={undefined} labelStyle="text-dark-grey-2 text-p1_regular" />
 								<span>|</span>
 								<span>YYYY.MM.DD</span>
 							</div>

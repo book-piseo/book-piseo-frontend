@@ -9,10 +9,9 @@ const TeamBookReviewList = ({ teamId }: { teamId: string }) => {
 
 	useEffect(() => {
 		getTeamContentsInfo({ teamId, pageNumber }).then((data) => {
-			console.log({ data });
 			setResult(data.content);
 		});
-	}, []);
+	}, [teamId, pageNumber]);
 
 	return (
 		<div className="flex flex-col">
@@ -28,7 +27,10 @@ const TeamBookReviewList = ({ teamId }: { teamId: string }) => {
 			)}
 			{result && result?.totalPages && result.totalPages > 0 && (
 				<div className="flex flex-col divide-y divide-solid divide-light-grey-2">
-					{result && result.content?.map((content) => <TeamBookReviewItem content={content} />)}
+					{result &&
+						result.content?.map((content, index) => (
+							<TeamBookReviewItem key={`team-review-item__${index}`} content={content} />
+						))}
 				</div>
 			)}
 		</div>

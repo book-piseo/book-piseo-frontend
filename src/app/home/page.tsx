@@ -25,6 +25,7 @@ function HomePage() {
 
 	useEffect(() => {
 		fetchHomeData();
+		//eslint-disable-next-line
 	}, []);
 
 	const fetchHomeData = async () => {

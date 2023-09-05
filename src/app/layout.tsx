@@ -1,7 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import HeaderPage from './page';
 import { SITE_ENV, SITE_TITLE } from '@constants/consts';
+import HeaderPage from './page';
 
 export const metadata: Metadata = {
 	title: {
