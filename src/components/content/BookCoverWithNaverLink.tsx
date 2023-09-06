@@ -3,6 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import { ImgNaverLogo } from '@assets/images';
 import { IcArrowUpLight } from '@assets/icons';
+import EmptyBookCoverImage from '@components/common/EmptyBookCoverImage';
 
 const BookCoverWithNaverLink = ({ src, link }: { src: string; link: string }) => {
 	const handleLink = (link: string) => {
@@ -11,9 +12,14 @@ const BookCoverWithNaverLink = ({ src, link }: { src: string; link: string }) =>
 
 	return (
 		<div className="rem:min-w-[275px]">
-			<div className="relative w-full rem:h-[430px]">
-				<Image src={src} alt="bookCover" fill unoptimized />
-			</div>
+			{src ? (
+				<div className="relative w-full rem:h-[430px]">
+					<Image src={src} alt="bookCover" fill unoptimized />{' '}
+				</div>
+			) : (
+				<EmptyBookCoverImage width="full" height="rem:h-[430px]" borderRadius="0" />
+			)}
+
 			<div
 				className="w-full rem:py-[14px] rem:pl-[20px] rem:pr-[10px] flex justify-between items-center bg-light-grey-1 cursor-pointer"
 				onClick={() => {

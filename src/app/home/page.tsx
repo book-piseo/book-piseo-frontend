@@ -22,8 +22,6 @@ function HomePage() {
 	const [pageNumber, setPageNumber] = useState(0);
 	const [otherTeamContents, setOtherTeamContents] = useState<PageContentsInfoReponse | null>(null);
 
-	console.log({ otherTeamContents });
-
 	useEffect(() => {
 		fetchHomeData();
 		//eslint-disable-next-line

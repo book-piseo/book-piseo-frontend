@@ -7,12 +7,18 @@ import { ModalHeader } from '../common/ModalHeader';
 import { postContent } from '@apis/postApi';
 import { PostStore, usePostStore } from '@stores/usePostStore';
 import { ToastType, useToastActions } from '@stores/useToastStore';
+import { useAuthStore } from '@stores/useAuthStore';
+import useStore from '@hooks/useStore';
+import { useRouter } from 'next/navigation';
 
 export const ConfirmModal = () => {
+	const store = useStore(useAuthStore, (state) => state);
 	const isModalOpen = usePostConfirmState();
 	const changeModalState = useModalActions();
 	const postStore = usePostStore();
 	const setToastState = useToastActions();
+
+	const router = useRouter();
 
 	const handleCloseModal = () => {
 		changeModalState(ModalType.postConfirm);
@@ -28,19 +34,21 @@ export const ConfirmModal = () => {
 		};
 	};
 
-	const handleSaveButton = (postStore: PostStore) => {
+	const handleSaveButton = async (postStore: PostStore) => {
 		const state = { ...postStore };
 		delete state.teamName;
-		postContent(state).then((res) => {
-			if (!res.ok) {
-				changeModalState(ModalType.postConfirm);
-				return alert('예기치 못한 에러가 발생했습니다. 다시 시도해주세요. 🙂');
-			}
-			if (res.status) {
-				handleToast();
-			}
-		});
-		changeModalState(ModalType.postConfirm);
+
+		const res = await postContent({ token: store?.token || '', param: state });
+
+		if (res?.result === 500) {
+			changeModalState(ModalType.postConfirm);
+			return alert('예기치 못한 에러가 발생했습니다. 다시 시도해주세요. 🙂');
+		}
+		if (res?.result === 200) {
+			changeModalState(ModalType.postConfirm);
+			router.push(`/content?id=${res?.data.contentsId}`);
+			handleToast();
+		}
 	};
 
 	return (

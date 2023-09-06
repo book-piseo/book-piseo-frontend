@@ -12,12 +12,14 @@ import { useRouter, usePathname } from 'next/navigation';
 import Avatar from '@components/elements/avatars/Avatar';
 import { ModalType, useModalActions } from '@stores/useModalStore';
 import { useUserInfoStore } from '@stores/useUserInfoStore';
+import { PostStore, usePostStore } from '@stores/usePostStore';
 
 export default function Page() {
 	const router = useRouter();
 	const pathName = usePathname();
 	const store = useStore(useAuthStore, (state) => state);
 	const userStore = useStore(useUserInfoStore, (state) => state);
+	const postStore = usePostStore();
 	const changeModalState = useModalActions();
 
 	useEffect(() => {
@@ -44,6 +46,14 @@ export default function Page() {
 	const isPostPage = pathName === '/post';
 	const isHiddenHeader = pathName === '/signin' ? 'hidden' : 'flex';
 
+	const getIsDisableSaveButton = (postStore: PostStore) => {
+		const isEmpty = (text: string) => text.trim() === '';
+		if (isEmpty(postStore.contentsTitle) || isEmpty(postStore.contentsText) || isEmpty(postStore.bookInfo.isbn)) {
+			return true;
+		}
+		return false;
+	};
+
 	return (
 		<header
 			className={`page-header fixed top-0 w-screen rem:h-[80px] items-center justify-between rem:px-[120px] bg-white z-50 ${isHiddenHeader}`}
@@ -60,7 +70,7 @@ export default function Page() {
 					<>
 						{isPostPage ? (
 							//  MARK :: SAVE BUTTON
-							<RoundButton label="저장" disabled={false} onClick={handleSaveButton} />
+							<RoundButton label="저장" disabled={getIsDisableSaveButton(postStore)} onClick={handleSaveButton} />
 						) : (
 							// MARK :: WRITING BUTTON
 							<Link href="/post">

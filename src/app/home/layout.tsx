@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { ImgHomeMain, ImgHomeMainSVG, ImgHomeMain2x } from '@assets/images';
+import { ImgHomeMain2x } from '@assets/images';
 import Footer from '@components/layout/Footer';
 
 export default function HomeLayout({ children }: { children: React.ReactNode }) {

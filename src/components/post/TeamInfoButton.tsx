@@ -1,11 +1,12 @@
+'use client';
 import Image from 'next/image';
 import { IcArrowDown } from '../../../public/assets/icons';
 import { ModalType, useModalActions } from '@stores/useModalStore';
 import { usePostStore } from '@stores/usePostStore';
 
 export const TeamInfoButton = () => {
-	const changeModalState = useModalActions();
 	const state = usePostStore();
+	const changeModalState = useModalActions();
 
 	return (
 		<div
