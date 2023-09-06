@@ -27,14 +27,13 @@ function HomePage() {
 	useEffect(() => {
 		fetchHomeData();
 		//eslint-disable-next-line
-	}, []);
+	}, [store?.isLogin, store?.token]);
 
 	const fetchHomeData = async () => {
 		const otherTeamContentsData = await getOtherTeamContents({ pageNumber });
 		setOtherTeamContents(otherTeamContentsData);
-
-		if (store?.isLogin) {
-			const userInfoData = await getUserInfo();
+		if (store?.isLogin && store?.token) {
+			const userInfoData = await getUserInfo({ token: store.token });
 			userStore && userStore.setUserInfo(userInfoData);
 		}
 	};
@@ -70,7 +69,7 @@ function HomePage() {
 				{!otherTeamContents ? (
 					<div className="flex flex-col w-full rem:h-[400px] items-center justify-center rem:gap-[24px]">
 						<Image src={ImgEmptyOtherTeam} alt="빈 리뷰 리스트" className="rem:w-[220px] rem:h-[220px]" />
-						<p className="text-dark-grey-2 text-s3_medium">
+						<p className="text-dark-grey-2 text-s2_medium">
 							당신이 첫 글을 쓸 기회! <br /> 등록된 글이 아직 없어요.
 						</p>
 					</div>
@@ -79,7 +78,7 @@ function HomePage() {
 						{otherTeamContents && otherTeamContents?.content?.length == 0 && (
 							<div className="flex flex-col w-full rem:h-[400px] items-center justify-center rem:gap-[24px]">
 								<Image src={ImgEmptyOtherTeam} alt="빈 리뷰 리스트" className="rem:w-[220px] rem:h-[220px]" />
-								<p className="text-dark-grey-2 text-s3_medium">
+								<p className="text-dark-grey-2 text-s2_medium">
 									당신이 첫 글을 쓸 기회! <br /> 등록된 글이 아직 없어요.
 								</p>
 							</div>

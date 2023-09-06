@@ -10,16 +10,10 @@ export const getOtherTeamContents = async ({ pageNumber }: { pageNumber: number 
 /**
  * @홈_소속_팀_게시물_정보
  */
-export const getMyTeamContents = async ({ pageNumber }: { pageNumber: number }) => {
-	const authState = JSON.parse(localStorage.getItem('LOGIN_AUTH_STORE') || '') || '';
-
-	if (!authState) {
-		// NOTE :: 에러 처리 필요
-	}
-
+export const getMyTeamContents = async ({ pageNumber, token }: { pageNumber: number; token: string }) => {
 	const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/home/affiliated-teams/contents/${pageNumber}`, {
 		headers: {
-			'User-Token': authState.state.userToken,
+			'User-Token': token,
 		},
 	});
 	return response.json();

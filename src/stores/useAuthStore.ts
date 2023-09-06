@@ -35,8 +35,8 @@ export const useAuthStore = create<AuthState & AuthAction>()(
 				setPassword: (value: string) => set({ password: value }),
 				setAutoLogin: (value: boolean) => set({ autoLogin: value }),
 				setIsLogin: (value: boolean) => set({ isLogin: value }),
-				setLoginToken: (token: string) => {
-					set({ token, isLogin: true });
+				setLoginToken: (value: string) => {
+					set({ token: value, isLogin: true });
 				},
 				clearAuth: () => set(initialState),
 			}),
