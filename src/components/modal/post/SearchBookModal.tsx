@@ -6,13 +6,14 @@ import { ModalContainer } from '../common/ModalContainer';
 import { ModalHeader } from '../common/ModalHeader';
 import { BookSearchInput } from '@components/elements/inputs/BookSearchInput';
 import { getNaverBookList } from '@apis/postApi';
-import { ImgEmptyBookForModal, ImgSearchResult } from '@assets/images';
+import { ImgEmptyBookForModal, ImgNoResult, ImgSearchResult } from '@assets/images';
 import Image from 'next/image';
 import { useSetPostStore } from '@stores/usePostStore';
 
 export const SearchBookModal = () => {
 	const [resultBookList, setResultBookList] = useState<BookInfo[]>([]);
 	const [searchValue, setSearchValue] = useState<string>('');
+	const [isSearched, setIsSearched] = useState<boolean>(false); //검색여부
 
 	const isModalOpen = useSearchBookState();
 	const changeModalState = useModalActions();
@@ -53,6 +54,7 @@ export const SearchBookModal = () => {
 			const query = encodeURIComponent(e.currentTarget.value);
 			const res = await getNaverBookList(query);
 			res && setResultBookList(res.items);
+			setIsSearched(true);
 		}
 	};
 
@@ -60,6 +62,9 @@ export const SearchBookModal = () => {
 	 * input 값 변경 handler
 	 */
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (isSearched) {
+			setIsSearched(false);
+		}
 		setSearchValue(e.target.value);
 	};
 
@@ -71,9 +76,21 @@ export const SearchBookModal = () => {
 		clearResultBookList();
 	};
 
-	const renderListSection = (hasInfo: boolean) => {
-		return hasInfo ? (
-			// 검색 결과
+	const renderListSection = () => {
+		//  검색 전
+		if (!isSearched) {
+			return (
+				<div className="flex justify-center items-center w-full h-full ">
+					<div className="flex flex-col text-center rem:gap-[24px]">
+						<Image src={ImgSearchResult} alt="searchImage" className="rem:w-[175px] rem:h-[175px]" />
+						<div className="text-s3_medium text-dark-grey-2">어떤 책을 읽었나요?</div>
+					</div>
+				</div>
+			);
+		}
+
+		// 검색 결과
+		return resultBookList.length ? (
 			<div className="flex flex-col rem:px-[65px] rem:py-[40px] overflow-y-scroll rem:gap-[28px]">
 				{resultBookList.map((info) => (
 					<div
@@ -99,11 +116,13 @@ export const SearchBookModal = () => {
 				))}
 			</div>
 		) : (
-			//  검색 전
 			<div className="flex justify-center items-center w-full h-full ">
 				<div className="flex flex-col text-center rem:gap-[24px]">
-					<Image src={ImgSearchResult} alt="searchImage" className="rem:w-[175px] rem:h-[175px]" />
-					<div className="text-s3_medium text-dark-grey-2">어떤 책을 읽었나요?</div>
+					<Image src={ImgNoResult} alt="searchImage" className="rem:w-[175px] rem:h-[175px]" />
+					<div className="text-s3_medium text-dark-grey-2">
+						책을 찾을 수 없어요. <br />
+						키워드를 바꿔 검색해보세요.
+					</div>
 				</div>
 			</div>
 		);
@@ -122,7 +141,7 @@ export const SearchBookModal = () => {
 					handleCancelIcon={handleCancelIcon}
 				/>
 				{/* list */}
-				{renderListSection(Boolean(resultBookList.length))}
+				{renderListSection()}
 			</div>
 		</ModalContainer>
 	);

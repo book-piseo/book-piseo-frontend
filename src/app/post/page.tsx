@@ -6,11 +6,27 @@ import { BookInfoSection } from '@components/post/BookInfoSection';
 import { ContentTextarea } from '@components/post/ContentTextarea';
 import { TeamInfoButton } from '@components/post/TeamInfoButton';
 import { TitleInput } from '@components/post/TitleInput';
+import useStore from '@hooks/useStore';
 import { useInitPostStore, useSetPostStore } from '@stores/usePostStore';
+
+import { useUserInfoStore } from '@stores/useUserInfoStore';
 import React, { useEffect } from 'react';
 
 const Page = () => {
 	const initPostStore = useInitPostStore();
+
+	const setPostStore = useSetPostStore();
+	const userStore = useStore(useUserInfoStore, (state) => state);
+
+	useEffect(() => {
+		if (!userStore?.userInfo?.affiliatedTeamInfos) {
+			return;
+		}
+		setPostStore({
+			teamName: userStore.userInfo.affiliatedTeamInfos[0].teamName,
+			teamId: userStore.userInfo.affiliatedTeamInfos[0].teamId,
+		});
+	}, [userStore]);
 
 	useEffect(() => {
 		initPostStore();
@@ -28,6 +44,7 @@ const Page = () => {
 				<TitleInput />
 				<ContentTextarea />
 			</div>
+
 			{/* modal */}
 			<ConfirmModal />
 			<SelectTeamModal />

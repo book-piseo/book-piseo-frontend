@@ -1,7 +1,7 @@
-import { TeamInfo } from '@models/userInfo';
+import { AffiliatedTeamInfo } from '@models/team.model';
 
 type Props = {
-	info: TeamInfo;
+	info: AffiliatedTeamInfo;
 	isSelected: boolean;
 	handleClickItem: () => void;
 };

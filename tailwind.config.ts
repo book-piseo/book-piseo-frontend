@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
 	content: [
@@ -68,5 +68,5 @@ const config: Config = {
 		extend: {},
 	},
 	plugins: [require('tailwindcss-convert-px-to-rem')],
-}
-export default config
+};
+export default config;

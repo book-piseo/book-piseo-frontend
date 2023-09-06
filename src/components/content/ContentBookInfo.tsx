@@ -1,7 +1,7 @@
 'use client';
+import Avatar from '@components/elements/avatars/Avatar';
 import BookCoverWithNaverLink from './BookCoverWithNaverLink';
 import { ContentsInfoResponse } from '@models/contents.model';
-import Image from 'next/image';
 
 export const ContentBookInfo = ({ content }: { content: Partial<ContentsInfoResponse> }) => {
 	const { bookInfo } = content;
@@ -20,17 +20,9 @@ export const ContentBookInfo = ({ content }: { content: Partial<ContentsInfoResp
 			{/* 책 설명  */}
 			<div className="flex flex-col justify-between w-full rem:h-[430px]">
 				<div className="flex flex-col rem:gap-[24px]">
-					<div className="w-full text-h1_bold text-ellipsis-line-3">{content.contentsTitle}</div>
+					<div className="w-full text-h1_bold text-ellipsis-line-3 ">{content.contentsTitle}</div>
 					<div className="flex items-center text-p1_regular text-dark-grey-2 rem:gap-[14px]">
-						<div className="relative rem:w-[32px] rem:h-[32px]">
-							<Image
-								src={content.writerInfo?.profileImg || ''}
-								alt="profile"
-								className="rounded-full"
-								unoptimized
-								fill
-							/>
-						</div>
+						<Avatar path={content.writerInfo?.profileImg || ''} />
 						<span>{content.writerInfo?.userName}</span>
 						<span>|</span>
 						<span> {getRegDt(content)}</span>
