@@ -6,14 +6,26 @@ import { ModalFooter } from '../common/ModalFooter';
 import { ModalHeader } from '../common/ModalHeader';
 import { postContent } from '@apis/postApi';
 import { PostStore, usePostStore } from '@stores/usePostStore';
+import { ToastType, useToastActions } from '@stores/useToastStore';
 
 export const ConfirmModal = () => {
 	const isModalOpen = usePostConfirmState();
 	const changeModalState = useModalActions();
 	const postStore = usePostStore();
+	const setToastState = useToastActions();
 
 	const handleCloseModal = () => {
 		changeModalState(ModalType.postConfirm);
+	};
+
+	const handleToast = () => {
+		setToastState(ToastType.postCompleted);
+		let timer = setTimeout(() => {
+			setToastState(ToastType.postCompleted);
+		}, 1500);
+		return () => {
+			clearTimeout(timer);
+		};
 	};
 
 	const handleSaveButton = (postStore: PostStore) => {
@@ -21,10 +33,14 @@ export const ConfirmModal = () => {
 		delete state.teamName;
 		postContent(state).then((res) => {
 			if (!res.ok) {
-				alert('예기치 못한 에러가 발생했습니다. 다시 시도해주세요. 🙂');
 				changeModalState(ModalType.postConfirm);
+				return alert('예기치 못한 에러가 발생했습니다. 다시 시도해주세요. 🙂');
+			}
+			if (res.status) {
+				handleToast();
 			}
 		});
+		changeModalState(ModalType.postConfirm);
 	};
 
 	return (
