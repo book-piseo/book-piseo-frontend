@@ -10,6 +10,8 @@ import { useEffect, useState } from 'react';
 import { useSetPostStore } from '@stores/usePostStore';
 import { getUserInfo } from '@apis/userInfoApi';
 import { AffiliatedTeamInfo } from '@models/team.model';
+import useStore from '@hooks/useStore';
+import { useAuthStore } from '@stores/useAuthStore';
 
 // api 연동되면 삭제
 const dummy: TeamInfo[] = [
@@ -37,6 +39,7 @@ const dummy: TeamInfo[] = [
 ];
 
 export const SelectTeamModal = () => {
+	const store = useStore(useAuthStore, (state) => state);
 	const [teamList, setTeamList] = useState<AffiliatedTeamInfo[]>([]);
 	const [selectedTeam, setSelectedTeam] = useState<{ teamId: string; teamName: string }>({
 		teamId: '',
@@ -70,7 +73,8 @@ export const SelectTeamModal = () => {
 	 * fetch TeamList
 	 */
 	const getTeamList = async () => {
-		const res = await getUserInfo();
+		if (!store?.token) return;
+		const res = await getUserInfo({ token: store?.token });
 		if (!res) {
 			return;
 		}
@@ -79,7 +83,8 @@ export const SelectTeamModal = () => {
 
 	useEffect(() => {
 		getTeamList();
-	}, []);
+		// eslint-disable-next-line
+	}, [store?.token]);
 
 	return (
 		<ModalContainer isOpen={isModalOpen}>
