@@ -12,6 +12,7 @@ import { getOtherTeamContents } from '@apis/homeApi';
 import { getUserInfo } from '@apis/userInfoApi';
 import { PageContentsInfoReponse } from '@models/contents.model';
 import { useUserInfoStore } from '@stores/useUserInfoStore';
+import { ImgEmptyOtherTeam } from '@assets/images';
 
 function HomePage() {
 	const router = useRouter();
@@ -29,12 +30,13 @@ function HomePage() {
 	}, []);
 
 	const fetchHomeData = async () => {
-		const userInfoData = getUserInfo();
-		const otherTeamContentsData = getOtherTeamContents({ pageNumber });
-		const [userInfo, otherTeamContents] = await Promise.all([userInfoData, otherTeamContentsData]);
+		const otherTeamContentsData = await getOtherTeamContents({ pageNumber });
+		setOtherTeamContents(otherTeamContentsData);
 
-		userStore && userStore.setUserInfo(userInfo);
-		setOtherTeamContents(otherTeamContents);
+		if (store?.isLogin) {
+			const userInfoData = await getUserInfo();
+			userStore && userStore.setUserInfo(userInfoData);
+		}
 	};
 
 	const handleBookReview = (contentId: string) => {
@@ -65,23 +67,34 @@ function HomePage() {
 					<p className="text-s2_medium">다른 피서인은 이런 책을 읽었어요!</p>
 				</div>
 				{/* 리뷰 리스트 */}
-				<div className="grid w-full h-fit grid-cols-4 rem:gap-x-[40px] rem:gap-y-[80px]">
-					{otherTeamContents && otherTeamContents?.content?.length == 0 && (
-						<div className="flex flex-col w-full rem:h-[400px] items-center justify-center rem:gap-[24px]">
-							<div className="rem:w-[175px] rem:h-[175px] rounded-full bg-primary-sub"></div>
-							<p className="text-dark-grey-2 text-s3_medium">등록된 게시물이 없습니다.</p>
-						</div>
-					)}
-					{otherTeamContents &&
-						otherTeamContents?.content?.length > 0 &&
-						otherTeamContents?.content?.map((item, index) => (
-							<BookReview
-								key={`book-review-item__${index}`}
-								content={item}
-								onClick={() => handleBookReview(item.contentsId)}
-							/>
-						))}
-				</div>
+				{!otherTeamContents ? (
+					<div className="flex flex-col w-full rem:h-[400px] items-center justify-center rem:gap-[24px]">
+						<Image src={ImgEmptyOtherTeam} alt="빈 리뷰 리스트" className="rem:w-[220px] rem:h-[220px]" />
+						<p className="text-dark-grey-2 text-s3_medium">
+							당신이 첫 글을 쓸 기회! <br /> 등록된 글이 아직 없어요.
+						</p>
+					</div>
+				) : (
+					<div className="grid w-full h-fit grid-cols-4 rem:gap-x-[40px] rem:gap-y-[80px]">
+						{otherTeamContents && otherTeamContents?.content?.length == 0 && (
+							<div className="flex flex-col w-full rem:h-[400px] items-center justify-center rem:gap-[24px]">
+								<Image src={ImgEmptyOtherTeam} alt="빈 리뷰 리스트" className="rem:w-[220px] rem:h-[220px]" />
+								<p className="text-dark-grey-2 text-s3_medium">
+									당신이 첫 글을 쓸 기회! <br /> 등록된 글이 아직 없어요.
+								</p>
+							</div>
+						)}
+						{otherTeamContents &&
+							otherTeamContents?.content?.length > 0 &&
+							otherTeamContents?.content?.map((item, index) => (
+								<BookReview
+									key={`book-review-item__${index}`}
+									content={item}
+									onClick={() => handleBookReview(item.contentsId)}
+								/>
+							))}
+					</div>
+				)}
 			</div>
 		</>
 	);

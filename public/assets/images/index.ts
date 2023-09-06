@@ -8,3 +8,5 @@ export { default as ImgNaverLogo } from './img_NAVER-Logo-Green.png';
 export { default as ImgDummyBookCover } from './img_book-cover-example.png';
 
 export { default as ImgBookCoverExample } from './img_book-cover-example.png';
+export { default as ImgEmptyOtherTeam } from './img-empty-other-team.svg';
+export { default as ImgEmptyBookCover } from './img_empty_book_cover.png';

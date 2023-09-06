@@ -14,7 +14,7 @@ const LoginForm = () => {
 	const handleLogin = async () => {
 		await login({ email: store!.email, password: store!.password }).then(async (res) => {
 			if (res?.result === 200) {
-				store && store.setIsLogin(true);
+				store && store.setLoginToken(res.data.tokenId);
 				router.push('/home');
 			} else if (res?.result === 401) {
 				alert(res.data.errorMessage);
