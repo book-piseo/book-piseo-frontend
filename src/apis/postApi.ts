@@ -31,16 +31,18 @@ export const getNaverBookList = (query: string) => {
  * 게시글 작성
  * */
 export const postContent = async (params: ContentsSaveRequest) => {
+	const authState = JSON.parse(localStorage.getItem('LOGIN_AUTH_STORE') || '') || '';
+
+	if (!authState) {
+		// NOTE :: 에러 처리 필요
+	}
+
 	return fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contents`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
+			'User-Token': authState.state.userToken,
 		},
-		cache: 'no-cache',
-		mode: 'no-cors',
-		credentials: 'same-origin',
-		redirect: 'follow',
-		referrer: 'no-referrer',
 		body: JSON.stringify(params),
 	});
 };

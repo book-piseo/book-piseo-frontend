@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { ImgEmptyBookCover } from '@assets/images';
 
 type EmptyBookCoverImageProps = {
 	width?: string;
@@ -11,7 +12,7 @@ const EmptyBookCoverImage = ({ width, height = '470px', borderRadius = '16px' }:
 	const getWidth = width ? `rem:w-[${width}]` : 'w-full';
 	const getHeight = `rem:h-[${height}]`;
 	const getRounded = `rounded-[${borderRadius}]`;
-	return <div className={`${getWidth} ${getHeight} ${getRounded} bg-light-grey-2`}></div>;
+	return <Image src={ImgEmptyBookCover} className={`${getWidth} ${getHeight} ${getRounded}`} alt="빈 책 커버 이미지" />;
 };
 
 export default EmptyBookCoverImage;

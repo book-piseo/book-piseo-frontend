@@ -6,3 +6,5 @@ export { default as ImgEmptyResult } from './img_empty-result.png';
 export { default as ImgSearchResult } from './img_search-result.png';
 
 export { default as ImgBookCoverExample } from './img_book-cover-example.png';
+export { default as ImgEmptyOtherTeam } from './img-empty-other-team.svg';
+export { default as ImgEmptyBookCover } from './img_empty_book_cover.png';

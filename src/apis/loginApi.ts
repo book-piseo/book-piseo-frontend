@@ -18,12 +18,8 @@ export const login = async (params: LoginRequest) => {
 		body: JSON.stringify(params),
 	})
 		.then(async (res) => {
-			if (res.status === 200) {
-				return { result: 200 } as ApiResult;
-			} else if (res.status !== 200) {
-				const error: ErrorResponse = await res.json();
-				return { result: res.status, data: error };
-			}
+			const data = await res.json();
+			return { result: res.status, data } as ApiResult;
 		})
 		.catch((e) => console.warn(e));
 };

@@ -12,6 +12,7 @@ type BookReviewItemProps = {
 };
 
 const BookReview = ({ content, onClick }: BookReviewItemProps) => {
+	console.log(content);
 	const [isHovering, setIsHovering] = useState(false);
 
 	const handleMouseOver = () => {
