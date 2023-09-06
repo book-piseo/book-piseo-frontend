@@ -1,19 +1,26 @@
-import { ImgBookCoverExample } from '@assets/images';
 import React from 'react';
 import Image from 'next/image';
 import AvatarProfile from '@components/common/AvatarProfile';
-import { LinkButton } from '@components/elements/buttons/LinkButton';
 import { IcBook } from '@assets/icons';
 import { ContentsInfoResponse } from '@models/contents.model';
 import { format } from 'date-fns';
 import EmptyBookCoverImage from '@components/common/EmptyBookCoverImage';
+import { useRouter } from 'next/navigation';
 
 const TeamBookReviewItem = ({ content }: { content: ContentsInfoResponse }) => {
+	const router = useRouter();
 	const formatRegDate = content?.regDt ? new Date(content.regDt) : new Date();
+
+	const handleGoToContentsPage = (contentId: string) => {
+		router.push(`/content?id=${contentId}`);
+	};
 
 	return (
 		<div className="flex space-x-[2.5rem] rem:py-[40px]">
-			<div className="relative rem:min-w-[170px] w-fit rem:h-[265px]">
+			<div
+				className="relative rem:min-w-[170px] w-fit rem:h-[265px] cursor-pointer"
+				onClick={() => handleGoToContentsPage(content?.contentsId)}
+			>
 				{content?.bookInfo?.image ? (
 					<Image fill unoptimized src={content?.bookInfo?.image} alt="cover" />
 				) : (
@@ -33,7 +40,10 @@ const TeamBookReviewItem = ({ content }: { content: ContentsInfoResponse }) => {
 						<span>{format(formatRegDate, 'yyyy-MM-dd')}</span>
 					</div>
 
-					<div className="flex flex-col rem:gap-[30px]">
+					<div
+						className="flex flex-col rem:gap-[30px] cursor-pointer"
+						onClick={() => handleGoToContentsPage(content?.contentsId)}
+					>
 						<div className="flex flex-col rem:gap-[10px]">
 							<h2 className="text-dark-grey-1 text-s1_semibold text-ellipsis-line-2 rem:leading-[28px]">
 								{content?.contentsTitle}

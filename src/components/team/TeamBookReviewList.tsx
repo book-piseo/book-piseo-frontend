@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import TeamBookReviewItem from './TeamBookReviewItem';
+import React from 'react';
+import TeamBookReviewItem from '@components/team/TeamBookReviewItem';
 import { PageContentsInfoReponse } from '@models/contents.model';
 import Image from 'next/image';
 import { ImgEmptyOtherTeam } from '@assets/images';
 
 const TeamBookReviewList = ({ contentsInfo }: { contentsInfo?: PageContentsInfoReponse }) => {
-	console.log({ contentsInfo });
 	return (
 		<div className="flex flex-col">
 			<div className="flex gap-[4px] text-dark-grey-1 text-s3_semibold leading-[normal]">
@@ -14,7 +13,7 @@ const TeamBookReviewList = ({ contentsInfo }: { contentsInfo?: PageContentsInfoR
 			</div>
 			{!contentsInfo ? (
 				<div className="flex flex-col w-full rem:h-[400px] items-center justify-center rem:gap-[24px]">
-					<Image src={ImgEmptyOtherTeam} alt="빈 리뷰 리스트" className="rem:w-[220px] rem:h-[220px]" />
+					<Image src={ImgEmptyOtherTeam} alt="empty" className="rem:w-[220px] rem:h-[220px]" />
 					<p className="text-dark-grey-2 text-s2_medium text-center">
 						이 팀은 글을 작성하기에
 						<br />더 좋은 타이밍을 기다리고 있어요.
@@ -24,7 +23,7 @@ const TeamBookReviewList = ({ contentsInfo }: { contentsInfo?: PageContentsInfoR
 				<>
 					{contentsInfo && contentsInfo?.content?.length === 0 && (
 						<div className="flex flex-col w-full rem:h-[400px] items-center justify-center rem:gap-[24px]">
-							<Image src={ImgEmptyOtherTeam} alt="빈 리뷰 리스트" className="rem:w-[220px] rem:h-[220px]" />
+							<Image src={ImgEmptyOtherTeam} alt="empty" className="rem:w-[220px] rem:h-[220px]" />
 							<p className="text-dark-grey-2 text-s2_medium text-center">
 								이 팀은 글을 작성하기에 <br />더 좋은 타이밍을 기다리고 있어요.
 							</p>

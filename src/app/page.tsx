@@ -42,9 +42,12 @@ export default function Page() {
 	};
 
 	const isPostPage = pathName === '/post';
+	const isHiddenHeader = pathName === '/signin' ? 'hidden' : 'flex';
 
 	return (
-		<header className="page-header fixed top-0 flex w-screen rem:h-[80px] items-center justify-between rem:px-[120px] bg-white z-50">
+		<header
+			className={`page-header fixed top-0 w-screen rem:h-[80px] items-center justify-between rem:px-[120px] bg-white z-50 ${isHiddenHeader}`}
+		>
 			<Link href="/home">
 				<Image src={LogoGnb} alt="logo" className="rem:w-[144px] rem:h-[30px]" />
 			</Link>

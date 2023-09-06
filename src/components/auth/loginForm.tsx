@@ -10,7 +10,6 @@ import React, { useEffect, useRef, useState } from 'react';
 const LoginForm = () => {
 	const router = useRouter();
 	const store = useStore(useAuthStore, (state) => state);
-	const buttonRef = useRef<HTMLDivElement>(null);
 
 	const [disabled, setDisabled] = useState(false);
 
@@ -46,15 +45,10 @@ const LoginForm = () => {
 					placeholder="비밀번호"
 					value={store?.password || ''}
 					onChange={(e) => store && store.setPassword(e.target.value)}
-					onKeyDown={(e) => {
-						if (e.key === 'Enter') {
-							buttonRef.current?.click();
-						}
-					}}
 				/>
 			</div>
 
-			<LoginButton ref={buttonRef} disabled={disabled} onClick={handleLogin} />
+			<LoginButton disabled={disabled} onClick={handleLogin} />
 		</>
 	);
 };
