@@ -13,6 +13,12 @@ const nextConfig = {
 				protocol: 'https',
 				hostname: 'shopping-phinf.pstatic.net',
 			},
+			{
+				protocol: 'http',
+				hostname: 'bookthumb.phinf.naver.net',
+				port: '',
+				pathname: '/corvor/**',
+			},
 		],
 	},
 	reactStrictMode: true,

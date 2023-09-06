@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import AvatarProfile from '@components/common/AvatarProfile';
 import { ContentsInfoResponse } from '@models/contents.model';
+import { useRouter } from 'next/navigation';
 
 type BookReviewItemProps = {
 	content: ContentsInfoResponse;
@@ -12,7 +13,7 @@ type BookReviewItemProps = {
 };
 
 const BookReview = ({ content, onClick }: BookReviewItemProps) => {
-	console.log(content);
+	const router = useRouter();
 	const [isHovering, setIsHovering] = useState(false);
 
 	const handleMouseOver = () => {
@@ -23,10 +24,19 @@ const BookReview = ({ content, onClick }: BookReviewItemProps) => {
 		setIsHovering(false);
 	};
 
+	const handleGoToTeamPage = () => {
+		router.push(`/team/${content.teamId}`);
+	};
+
 	return (
-		<div className="flex flex-col w-full rem:gap-[20px]" onClick={onClick}>
+		<div className="flex flex-col w-full rem:gap-[20px]">
 			{/* 책 커버 이미지 */}
-			<div className="relative cursor-pointer" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+			<div
+				className="relative cursor-pointer"
+				onClick={onClick}
+				onMouseOver={handleMouseOver}
+				onMouseOut={handleMouseOut}
+			>
 				<div className={`absolute w-full rem:h-[470px] ${isHovering ? 'visible' : 'invisible'}`}>
 					<div className={`absolute w-[80%] h-fit bg-white rounded-br-[16px] z-20`}>
 						<div className="flex items-start rem:p-[14px] rem:gap-[8px]">
@@ -40,11 +50,21 @@ const BookReview = ({ content, onClick }: BookReviewItemProps) => {
 					</div>
 					<div className={`absolute w-full h-full rounded-[16px] bg-primary opacity-[0.6] z-10`}></div>
 				</div>
-				<EmptyBookCoverImage />
+
+				<div className="relative rem:min-w-[305px] w-full rem:h-[470px]">
+					{content?.bookInfo?.image ? (
+						<Image fill unoptimized src={content?.bookInfo?.image} alt="cover" className="rounded-[16px]" />
+					) : (
+						<EmptyBookCoverImage />
+					)}
+				</div>
 			</div>
 
 			<div className="flex flex-col rem:gap-[10px] rem:leading-[22px]">
-				<div className="rem:w-max[305px] text-s3_semibold text-dark-grey-1 text-ellipsis-line-2">
+				<div
+					className="rem:w-max[305px] text-s3_semibold text-dark-grey-1 text-ellipsis-line-2 cursor-pointer"
+					onClick={onClick}
+				>
 					{content.contentsTitle}
 				</div>
 
@@ -52,7 +72,10 @@ const BookReview = ({ content, onClick }: BookReviewItemProps) => {
 				<AvatarProfile userInfo={content?.writerInfo} />
 
 				{/* 팀 정보 */}
-				<div className="rem:w-max[305px] text-p2_medium text-light-grey-2 text-ellipsis-line-1">
+				<div
+					className="rem:w-max[305px] text-p2_medium text-light-grey-2 text-ellipsis-line-1 cursor-pointer"
+					onClick={handleGoToTeamPage}
+				>
 					{content?.teamName || ''}
 				</div>
 			</div>
