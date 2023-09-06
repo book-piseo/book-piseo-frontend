@@ -1,3 +1,5 @@
+import { revalidatePath } from 'next/cache';
+
 /**
  * @팀_정보
  */
@@ -6,6 +8,7 @@ export const getTeamInfo = async ({ teamId, token }: { teamId: string; token: st
 		headers: {
 			'User-Token': token,
 		},
+		cache: 'no-cache',
 	});
 	return response.json();
 };
@@ -26,6 +29,7 @@ export const getTeamContentsInfo = async ({
 		headers: {
 			'User-Token': token,
 		},
+		cache: 'no-cache',
 	});
 	return response.json();
 };

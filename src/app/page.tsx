@@ -28,6 +28,7 @@ export default function Page() {
 		if (pathName === '/signin' && !store?.isLogin) {
 			router.push('/signin');
 		}
+		// eslint-disable-next-line
 	}, [pathName, store?.isLogin]);
 
 	const handleAvatar = () => {
@@ -64,9 +65,11 @@ export default function Page() {
 							</Link>
 						)}
 						{/* MARK :: AVATAR  */}
-						<div className="cursor-pointer" onClick={handleAvatar} title="로그아웃">
-							<Avatar path={(userStore && userStore?.userInfo?.profileImg) || ''} />
-						</div>
+						{!isPostPage && (
+							<div className="cursor-pointer" onClick={handleAvatar} title="로그아웃">
+								<Avatar path={(userStore && userStore?.userInfo?.profileImg) || ''} />
+							</div>
+						)}
 					</>
 				)}
 			</div>

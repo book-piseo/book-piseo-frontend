@@ -12,6 +12,7 @@ type TeamInfoProps = {
 
 const TeamInfo = ({ teamInfo }: TeamInfoProps) => {
 	const profileImgs = teamInfo?.teamMembers?.map((member) => member.profileImg || '');
+
 	const handleTeamMembersInfoModal = () => {
 		// console.log('여기요>>');
 	};
@@ -33,11 +34,11 @@ const TeamInfo = ({ teamInfo }: TeamInfoProps) => {
 						<span className="text-dark-grey-2 text-s3_medium">팀원</span>
 						<span className="text-primary text-s3_medium">{teamInfo?.teamMembers?.length}</span>
 					</div>
-					<RoundIconButton
+					{/* <RoundIconButton
 						label="전체 보기"
 						rightIcon={<Image src={IcArrowUpLight} alt="팀원 전체 보기" className="rem:w-[22px] rem:h-[22px]" />}
 						onClick={handleTeamMembersInfoModal}
-					/>
+					/> */}
 				</div>
 				<div className="flex flex-1 items-center justify-between rem:pl-[32px]">
 					<span className="text-dark-grey-2 text-s3_medium">팀 마스터</span>

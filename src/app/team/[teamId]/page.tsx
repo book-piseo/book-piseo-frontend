@@ -13,12 +13,10 @@ const TeamPage = ({ params }: { params: { teamId: string } }) => {
 	const [teamInfo, setTeamInfo] = useState<TeamDetailInfoReponse | null>(null);
 	const [content, setContent] = useState<PageContentsInfoReponse | null>(null);
 
-	console.log({ teamInfo, content });
-
 	useEffect(() => {
 		fetchTeamData();
 		// eslint-disable-next-line
-	}, [params.teamId]);
+	}, [store?.isLogin]);
 
 	const fetchTeamData = async () => {
 		if (!store?.token) return;

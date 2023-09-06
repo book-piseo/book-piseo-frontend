@@ -73,7 +73,7 @@ const BookReview = ({ content, onClick }: BookReviewItemProps) => {
 
 				{/* 팀 정보 */}
 				<div
-					className="rem:w-max[305px] text-p2_medium text-light-grey-2 text-ellipsis-line-1 cursor-pointer"
+					className="rem:w-max[305px] text-p2_medium text-light-grey-2 text-ellipsis-line-1 cursor-pointer hover:underline"
 					onClick={handleGoToTeamPage}
 				>
 					{content?.teamName || ''}

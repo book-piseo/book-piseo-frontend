@@ -5,11 +5,12 @@ import Image from 'next/image';
 import { ImgEmptyOtherTeam } from '@assets/images';
 
 const TeamBookReviewList = ({ contentsInfo }: { contentsInfo?: PageContentsInfoReponse }) => {
+	console.log({ contentsInfo });
 	return (
 		<div className="flex flex-col">
 			<div className="flex gap-[4px] text-dark-grey-1 text-s3_semibold leading-[normal]">
 				<span>전체</span>
-				<span>{contentsInfo?.totalPages || ''}</span>
+				<span>{contentsInfo?.totalElements || ''}</span>
 			</div>
 			{!contentsInfo ? (
 				<div className="flex flex-col w-full rem:h-[400px] items-center justify-center rem:gap-[24px]">
@@ -21,7 +22,7 @@ const TeamBookReviewList = ({ contentsInfo }: { contentsInfo?: PageContentsInfoR
 				</div>
 			) : (
 				<>
-					{contentsInfo && contentsInfo?.content.length === 0 && (
+					{contentsInfo && contentsInfo?.content?.length === 0 && (
 						<div className="flex flex-col w-full rem:h-[400px] items-center justify-center rem:gap-[24px]">
 							<Image src={ImgEmptyOtherTeam} alt="빈 리뷰 리스트" className="rem:w-[220px] rem:h-[220px]" />
 							<p className="text-dark-grey-2 text-s2_medium text-center">
@@ -31,7 +32,7 @@ const TeamBookReviewList = ({ contentsInfo }: { contentsInfo?: PageContentsInfoR
 					)}
 
 					{/* TODO 무한 스크롤 구현 필요 */}
-					{contentsInfo && contentsInfo?.totalPages && contentsInfo.totalPages > 0 && (
+					{contentsInfo && contentsInfo?.totalElements && contentsInfo?.totalElements > 0 && (
 						<div className="flex flex-col divide-y divide-solid divide-light-grey-2">
 							{contentsInfo &&
 								contentsInfo.content?.map((content, index) => (
