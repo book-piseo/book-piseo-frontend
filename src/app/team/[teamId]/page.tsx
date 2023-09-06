@@ -2,22 +2,28 @@
 import { getTeamContentsInfo, getTeamInfo } from '@apis/teamApi';
 import TeamBookReviewList from '@components/team/TeamBookReviewList';
 import TeamInfo from '@components/team/TeamInfo';
+import useStore from '@hooks/useStore';
 import { PageContentsInfoReponse } from '@models/contents.model';
 import { TeamDetailInfoReponse } from '@models/team.model';
+import { useAuthStore } from '@stores/useAuthStore';
 import React, { useEffect, useState } from 'react';
 
 const TeamPage = ({ params }: { params: { teamId: string } }) => {
-	const authState = JSON.parse(localStorage.getItem('LOGIN_AUTH_STORE') || '') || '';
-	console.log(authState);
-
+	const store = useStore(useAuthStore, (state) => state);
 	const [teamInfo, setTeamInfo] = useState<TeamDetailInfoReponse | null>(null);
 	const [content, setContent] = useState<PageContentsInfoReponse | null>(null);
 
-	useEffect(() => {}, [params.teamId]);
+	console.log({ teamInfo, content });
+
+	useEffect(() => {
+		fetchTeamData();
+		// eslint-disable-next-line
+	}, [params.teamId]);
 
 	const fetchTeamData = async () => {
-		const getTeamInfoData = getTeamInfo({ teamId: params.teamId });
-		const getTeamContentsInfoData = getTeamContentsInfo({ teamId: params.teamId, pageNumber: 0 });
+		if (!store?.token) return;
+		const getTeamInfoData = getTeamInfo({ teamId: params.teamId, token: store?.token });
+		const getTeamContentsInfoData = getTeamContentsInfo({ teamId: params.teamId, pageNumber: 0, token: store?.token });
 		const [teamInfoData, teamContentsInfoData] = await Promise.all([getTeamInfoData, getTeamContentsInfoData]);
 
 		setTeamInfo(teamInfoData);

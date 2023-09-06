@@ -4,6 +4,7 @@ import { IcArrowUpLight, IcBook, IcTeamHistoryCheck } from '@assets/icons';
 import { ImgBookCoverExample } from '@assets/images';
 import { LinkButton } from '@components/elements/buttons/LinkButton';
 import AvatarProfile from '@components/common/AvatarProfile';
+import { format } from 'date-fns';
 
 const LatestTeamBookReview = () => {
 	return (
@@ -17,9 +18,9 @@ const LatestTeamBookReview = () => {
 					/>
 					<span className="text-s3_medium text-dark-grey-1">팀원이 남긴 독서 기록을 지금 확인해보세요!</span>
 				</div>
-				<div className="flex rem:min-h-[35px] items-center justify-center rem:py-[8px] rem:px-[24px] border bg-white rounded-[30px] border-secondary leading-[normal]">
+				{/* <div className="flex rem:min-h-[35px] items-center justify-center rem:py-[8px] rem:px-[24px] border bg-white rounded-[30px] border-secondary leading-[normal]">
 					<span className="text-p1_semibold text-primary">1/5</span>
-				</div>
+				</div> */}
 			</div>
 			<div className="grid grid-cols-[30%_70%]">
 				<Image
@@ -53,7 +54,7 @@ const LatestTeamBookReview = () => {
 							<div className="flex items-center rem:gap-[10px] text-dark-grey-2 text-p1_regular">
 								<AvatarProfile avatarSize="medium" userInfo={undefined} labelStyle="text-dark-grey-2 text-p1_regular" />
 								<span>|</span>
-								<span>YYYY.MM.DD</span>
+								<span>{format(new Date(), 'yyyy.MM.dd')}</span>
 							</div>
 						</div>
 					</div>
