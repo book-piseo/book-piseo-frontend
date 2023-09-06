@@ -8,7 +8,7 @@ import { BookSearchInput } from '@components/elements/inputs/BookSearchInput';
 import { getNaverBookList } from '@apis/postApi';
 import { ImgEmptyBookForModal, ImgSearchResult } from '@assets/images';
 import Image from 'next/image';
-import { useContentAction } from '@stores/useContentStore';
+import { useSetPostStore } from '@stores/usePostStore';
 
 export const SearchBookModal = () => {
 	const [resultBookList, setResultBookList] = useState<BookInfo[]>([]);
@@ -16,7 +16,7 @@ export const SearchBookModal = () => {
 
 	const isModalOpen = useSearchBookState();
 	const changeModalState = useModalActions();
-	const changeContentState = useContentAction();
+	const setPostState = useSetPostStore();
 
 	/**
 	 * 검색 결과 list 초기화
@@ -80,7 +80,7 @@ export const SearchBookModal = () => {
 						key={info.isbn}
 						className="flex w-full h-full rem:gap-[40px] cursor-pointer"
 						onClick={() => {
-							changeContentState({ bookInfo: info });
+							setPostState({ bookInfo: info });
 							handleCloseModal();
 						}}
 					>

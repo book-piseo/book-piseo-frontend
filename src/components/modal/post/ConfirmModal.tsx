@@ -5,20 +5,20 @@ import { ModalContent } from '../common/ModalContent';
 import { ModalFooter } from '../common/ModalFooter';
 import { ModalHeader } from '../common/ModalHeader';
 import { postContent } from '@apis/postApi';
-import { useContentStore } from '@stores/useContentStore';
+import { PostStore, usePostStore } from '@stores/usePostStore';
 
 export const ConfirmModal = () => {
 	const isModalOpen = usePostConfirmState();
 	const changeModalState = useModalActions();
-	const contentStore = useContentStore();
+	const postStore = usePostStore();
 
 	const handleCloseModal = () => {
 		changeModalState(ModalType.postConfirm);
 	};
 
-	const handleSaveButton = (contentStore: any) => {
-		const state = { ...contentStore };
-		delete state.teamId;
+	const handleSaveButton = (postStore: PostStore) => {
+		const state = { ...postStore };
+		delete state.teamName;
 		postContent(state).then((res) => {
 			if (!res.ok) {
 				alert('예기치 못한 에러가 발생했습니다. 다시 시도해주세요. 🙂');
@@ -38,7 +38,7 @@ export const ConfirmModal = () => {
 			<ModalFooter
 				onCancel={handleCloseModal}
 				onConfirm={() => {
-					handleSaveButton(contentStore);
+					handleSaveButton(postStore);
 				}}
 			/>
 		</ModalContainer>

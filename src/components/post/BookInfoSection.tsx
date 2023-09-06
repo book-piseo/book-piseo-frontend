@@ -1,11 +1,11 @@
-import { useModalStore, ModalType } from '@/stores/useModalStore';
-import { useContentAction, useContentStore } from '@stores/useContentStore';
+import { useModalStore, ModalType } from '@stores/useModalStore';
+import { usePostStore } from '@stores/usePostStore';
 import Image from 'next/image';
 
 export const BookInfoSection = () => {
 	const { changeModalState } = useModalStore();
-	const state = useContentStore();
-	const changeContentState = useContentAction();
+	const { setPostStore } = usePostStore();
+	const state = usePostStore();
 
 	const hasBookInfo = Boolean(state.bookInfo.isbn.length);
 
@@ -28,7 +28,7 @@ export const BookInfoSection = () => {
 			<div
 				className="text-[#EC7F7F] text-s3_medium cursor-pointer"
 				onClick={() => {
-					changeContentState({
+					setPostStore({
 						bookInfo: {
 							title: '',
 							link: '',

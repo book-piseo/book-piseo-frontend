@@ -6,9 +6,16 @@ import { BookInfoSection } from '@components/post/BookInfoSection';
 import { ContentTextarea } from '@components/post/ContentTextarea';
 import { TeamInfoButton } from '@components/post/TeamInfoButton';
 import { TitleInput } from '@components/post/TitleInput';
-import React from 'react';
+import { useInitPostStore, useSetPostStore } from '@stores/usePostStore';
+import React, { useEffect } from 'react';
 
 const Page = () => {
+	const initPostStore = useInitPostStore();
+
+	useEffect(() => {
+		initPostStore();
+	}, []);
+
 	return (
 		<div className="rem:mx-[350px] rem:pt-[80px] rem:mb-[225px] flex flex-col">
 			{/* 소속 팀 / 책 정보 입력 */}

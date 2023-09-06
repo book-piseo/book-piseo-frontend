@@ -13,7 +13,7 @@ type TeamInfoProps = {
 const TeamInfo = ({ teamInfo }: TeamInfoProps) => {
 	const profileImgs = teamInfo?.teamMembers?.map((member) => member.profileImg || '');
 	const handleTeamMembersInfoModal = () => {
-		console.log('여기요>>');
+		// console.log('여기요>>');
 	};
 
 	return (

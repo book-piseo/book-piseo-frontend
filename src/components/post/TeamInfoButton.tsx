@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import { IcArrowDown } from '../../../public/assets/icons';
-import { ModalType, useModalActions } from '@/stores/useModalStore';
-import { useContentStore } from '@/stores/useContentStore';
+import { ModalType, useModalActions } from '@stores/useModalStore';
+import { usePostStore } from '@stores/usePostStore';
 
 export const TeamInfoButton = () => {
 	const changeModalState = useModalActions();
-	const state = useContentStore();
+	const state = usePostStore();
 
 	return (
 		<div

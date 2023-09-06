@@ -6,9 +6,12 @@ import { ModalContent } from '../common/ModalContent';
 import { ModalFooter } from '../common/ModalFooter';
 import { TeamListItem } from '@components/post/TeamListItem';
 import { TeamInfo } from '@models/userInfo';
-import { useState } from 'react';
-import { useContentAction } from '@/stores/useContentStore';
+import { useEffect, useState } from 'react';
+import { useSetPostStore } from '@stores/usePostStore';
+import { getUserInfo } from '@apis/userInfoApi';
+import { AffiliatedTeamInfo } from '@models/team.model';
 
+// api 연동되면 삭제
 const dummy: TeamInfo[] = [
 	{
 		teamId: 'id1',
@@ -34,6 +37,7 @@ const dummy: TeamInfo[] = [
 ];
 
 export const SelectTeamModal = () => {
+	const [teamList, setTeamList] = useState<AffiliatedTeamInfo[]>([]);
 	const [selectedTeam, setSelectedTeam] = useState<{ teamId: string; teamName: string }>({
 		teamId: '',
 		teamName: '',
@@ -41,7 +45,8 @@ export const SelectTeamModal = () => {
 
 	const isModalOpen = useSelectTeamState();
 	const changeModalState = useModalActions();
-	const changeContentState = useContentAction();
+	const setPostStore = useSetPostStore();
+
 	const isSelected = (item: TeamInfo) => item.teamId === selectedTeam.teamId;
 
 	const handleCloseModal = () => {
@@ -57,9 +62,24 @@ export const SelectTeamModal = () => {
 	};
 
 	const handleConfirmButton = () => {
-		changeContentState({ teamId: selectedTeam.teamId, teamName: selectedTeam.teamName });
+		setPostStore({ teamId: selectedTeam.teamId, teamName: selectedTeam.teamName });
 		handleCloseModal();
 	};
+
+	/**
+	 * fetch TeamList
+	 */
+	const getTeamList = async () => {
+		const res = await getUserInfo();
+		if (!res) {
+			return;
+		}
+		setTeamList(res.affiliatedTeamInfos);
+	};
+
+	useEffect(() => {
+		getTeamList();
+	}, []);
 
 	return (
 		<ModalContainer isOpen={isModalOpen}>
