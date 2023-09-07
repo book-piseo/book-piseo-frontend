@@ -21,8 +21,7 @@ const Page = () => {
 	const { postCompleted } = useToastStore();
 
 	const fetchContentData = async (paramId: string | null) => {
-		if (!store?.token) return;
-		const getContentData = await getContent({ token: store?.token, contentId: paramId === null ? '' : paramId });
+		const getContentData = await getContent({ contentId: paramId === null ? '' : paramId });
 		setContent(getContentData);
 	};
 
