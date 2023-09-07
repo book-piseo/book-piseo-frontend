@@ -50,7 +50,7 @@ function HomePage() {
 					</div>
 
 					{/* 최신 팀 리뷰 캐러셀 */}
-					<LatestTeamBookReview />
+					<LatestTeamBookReview teamBookReviews={otherTeamContents?.content} />
 
 					<div className="flex rem:w-[290px] justify-center invisible">
 						<CarouselArrowButton direction="right" />
