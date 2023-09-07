@@ -1,31 +1,44 @@
 {
-  "name": "book-piseo",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@types/node": "20.4.8",
-    "@types/react": "18.2.18",
-    "@types/react-dom": "18.2.7",
-    "autoprefixer": "10.4.14",
-    "eslint-config-next": "13.4.13",
-    "next": "13.4.13",
-    "postcss": "8.4.27",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
-  },
-  "devDependencies": {
-    "eslint": "^8.46.0",
-    "eslint-config-google": "^0.14.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "prettier": "^3.0.1"
-  }
+	"name": "book-piseo",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@svgr/webpack": "^8.1.0",
+		"@types/node": "20.4.8",
+		"@types/react": "18.2.18",
+		"@types/react-dom": "18.2.7",
+		"axios": "^1.5.0",
+		"date-fns": "^2.30.0",
+		"eslint-config-next": "13.4.13",
+		"http-proxy-middleware": "^2.0.6",
+		"next": "^13.4.19",
+		"next-auth": "^4.23.1",
+		"next-images": "^1.8.5",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"react-query": "^3.39.3",
+		"tailwindcss": "3.3.3",
+		"tailwindcss-convert-px-to-rem": "^1.0.4",
+		"typescript": "5.1.6",
+		"typescript-eslint": "^0.0.1-alpha.0",
+		"zustand": "^4.4.1"
+	},
+	"devDependencies": {
+		"@svgr/webpack": "^8.1.0",
+		"autoprefixer": "^10.4.15",
+		"babel-eslint": "^10.1.0",
+		"eslint": "^8.48.0",
+		"eslint-config-google": "^0.14.0",
+		"eslint-config-prettier": "^9.0.0",
+		"eslint-plugin-prettier": "^5.0.0",
+		"postcss": "^8.4.29",
+		"prettier": "^3.0.1",
+		"tailwindcss": "^3.3.3"
+	}
 }

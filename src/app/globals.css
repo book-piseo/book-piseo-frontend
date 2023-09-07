@@ -3,25 +3,63 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+	:root {
+	}
+}
+
+@font-face {
+	font-family: 'Pretendard Variable';
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	font-family: 'Pretendard Variable', serif;
+	background: white;
+}
+
+/* base font by screen size*/
+html {
+	font-size: 12px;
+}
+
+@media screen and (min-width: 1600px) {
+	html {
+		font-size: 13px;
+	}
+}
+
+@media screen and (min-width: 1920px) {
+	html {
+	font-size: 14px;
+	}
+}
+
+
+.text-ellipsis-line-1 {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	word-break: break-all;
+}
+
+.text-ellipsis-line-2 {
+	overflow: hidden;
+	white-space: normal;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	word-break: break-all;
+}
+
+.text-ellipsis-line-3 {
+	overflow: hidden;
+	white-space: normal;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	word-break: break-all;
 }
