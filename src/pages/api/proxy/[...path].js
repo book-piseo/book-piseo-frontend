@@ -11,7 +11,7 @@ export default createProxyMiddleware({
 	changeOrigin: true,
 	pathRewrite: { '^/api/proxy': '' },
 	headers: {
-		'X-Naver-Client-Id': '7X6OVnZIeDZzKbsiwaqw',
-		'X-Naver-Client-Secret': 'itnTnEsTsM',
+		'X-Naver-Client-Id': `${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}`,
+		'X-Naver-Client-Secret': `${process.env.NEXT_PUBLIC_NAVER_CLIENT_KEY}`,
 	},
 });
