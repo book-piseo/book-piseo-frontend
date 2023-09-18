@@ -30,13 +30,13 @@ const Page = () => {
 	}, [store?.isLogin, paramId]);
 
 	return (
-		<div className="rem:pt-[100px] rem:mb-[132px] rem:px-[350px] h-full">
+		<div className="rem:pt-[100px] rem:mb-[132px] rem:px-[350px]">
 			{/* 경로 */}
 			<ContentPath teamName={content.teamName ?? ''} teamId={content.teamId ?? ''} />
 			{/* 책 정보 */}
 			<ContentBookInfo content={content} />
 			{/* 포스팅 내용 */}
-			<Content contentsText={content.contentsText} />
+			<Content contentsText={content.contentsText || ''} />
 			{/* toast */}
 			<ToastContainer isOpen={postCompleted}>
 				<Toast text="소중한 독서 기록을 게시했어요. 오늘도 책을 피서!" />
