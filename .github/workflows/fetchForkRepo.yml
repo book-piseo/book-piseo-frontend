@@ -1,5 +1,6 @@
 name: git push into another repo to deploy to vercel
 
+# main branch에 push하면 실행
 on:
   push:
     branches: [main]
@@ -9,22 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     container: pandoc/latex
     steps:
-      - uses: actions/checkout@v2
-      - name: Install mustache (to update the date)
-        run: apk add ruby && gem install mustache
-      - name: creates output
+      - uses: actions/checkout@v4
+      - name: ruby와 mustache를 설치하고 있어요
+        run: |
+          apk add ruby
+          gem install mustache
+      - name: output을 생성하고 있어요
         run: sh ./build.sh
-      - name: Pushes to another repository
+
+      - name: 설정한 repository에 push하고 있어요
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@main
         env:
+          # 개인 계정 token
           API_TOKEN_GITHUB: ${{ secrets.DEPLOY_EMAIL_TOKEN }}
         with:
+          # GitHub Action will push files from
           source-directory: 'output'
+          # 개인 계정 user/repository name
           destination-github-username: dev-bomdong
           destination-repository-name: book-piseo-frontend
+          # 개인 계정 이메일 (optional)
           user-email: ${{ secrets.DEPLOY_EMAIL_ACCOUNT }}
+          # 원본 commit message를 그대로 사용해 commit (optional)
           commit-message: ${{ github.event.commits[0].message }}
           target-branch: main
-      - name: Test get variable exported by push-to-another-repository
-        run: echo $DESTINATION_CLONED_DIRECTORY
