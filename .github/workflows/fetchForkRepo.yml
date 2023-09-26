@@ -34,3 +34,4 @@ jobs:
           user-email: ${{ secrets.DEPLOY_EMAIL_ACCOUNT }}
           # 원본 commit message를 그대로 사용해 commit (optional)
           commit-message: ${{ github.event.commits[0].message }}
+          target-branch: main
